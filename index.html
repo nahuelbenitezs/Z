@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carta de Hamtaro</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .hamtaro {
+            width: 200px;
+            cursor: pointer;
+        }
+
+        .carta {
+            width: 300px;
+            height: 400px;
+            background-image: url('cerrada.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-image 0.3s;
+            overflow: hidden;
+        }
+
+        .carta.abierta {
+            background-image: url('abierto.png');
+        }
+
+        .mensaje {
+            display: none;
+            padding: 20px;
+            text-align: center;
+            overflow: auto;
+            height: 80%;
+            font-size: 18px;
+        }
+
+        .mensaje.visible {
+            display: block;
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="hamtaro" src="Hamtaro.png" alt="Hamtaro">
+        <div class="carta">
+            <div class="mensaje">
+          <p>
+            Hoy me siento inspirado para expresar lo profundo que es mi amor por
+            ti. A lo largo de los días, las semanas y los meses que hemos
+            compartido juntos, mi afecto hacia ti ha crecido y se ha fortalecido
+            de una manera que nunca antes había experimentado. Eres el latido de
+            mi corazón, la razón de mi sonrisa y el faro que ilumina mi camino.
+            Envolviéndome en una conexión especial que solo tú has despertado en
+            mí.
+          </p>
+          <p>
+            Cuando te conocí, nunca imaginé que llegarías a ocupar un lugar tan
+            importante en mi existencia. Tu presencia me llena de felicidad y me
+            hace sentir completo. Cada día a tu lado es un regalo inmenso que
+            atesoro con gratitud, y mi amor por ti se renueva constantemente. Tu
+            presencia en mi vida llena mis días de alegría y felicidad.
+          </p>
+          <p>
+            Cada vez que nuestros ojos se encuentran, siento una conexión
+            profunda y única que me hace creer. Me has enseñado que el amor va
+            más allá de las palabras y de los gestos. Es la forma en que te
+            preocupas por mí, cómo te interesas genuinamente, y cómo siempre
+            estás ahí para apoyarme en los momentos difíciles. Tu amor me ha
+            dado fuerza y confianza para enfrentar cualquier desafío que se
+            presente en el camino. En los días más oscuros, tus palabras de
+            aliento son mi luz. Tu abrazo es mi refugio seguro cuando siento que
+            el mundo se desmorona. Con cada risa compartida y cada lágrima
+            enjugada, nuestra conexión se hace más fuerte y más profunda.
+          </p>
+          <p>
+            Eres mi compañero en la vida, mi confidente y mi mejor amigo. Cada
+            vez que te miro a los ojos, puedo ver todo el amor y la ternura que
+            hay en tu corazón. Eres hermosa tanto por dentro como por fuera. Tu
+            presencia irradia calidez y bondad, y no puedo evitar enamorarme de
+            ti una y otra vez.
+          </p>
+          <p>
+            Y entre estas líneas, quiero que sepas cuánto significas para mí.
+            Eres la persona que da sentido, mi razón para levantarme cada mañana
+            con una sonrisa en el rostro. Eres mi inspiración y mi motivación.
+            Las palabras a menudo se quedan cortas cuando intento describir todo
+            lo que siento por ti, pero quiero que sepas que eres la persona más
+            especial que ha tocado mi corazón. Me inspiras a ser la mejor
+            versión de mí mismo, a superar mis miedos y a perseguir mis sueños
+            con valentía.
+          </p>
+          <p>
+            Cada logro que alcanzo, cada sonrisa que dibujo en mi rostro, lleva
+            tu nombre grabado en lo más profundo de mi ser.
+          </p>
+          <p>
+            Tu sonrisa ilumina mi mundo y me recuerda lo afortunado que soy de
+            tenerte a mi lado. Estoy agradecido por cada instante que
+            compartimos, y mi mayor deseo es hacerte feliz todos los días de
+            nuestras vidas.
+          </p>
+          <p>
+            "El amor es el ingrediente mágico que transforma lo ordinario en
+            extraordinario." En cada momento compartido a tu lado, encuentro la
+            magia en las cosas más simples. Una caminata por la playa se
+            convierte en un viaje lleno de risas y complicidad, una noche de
+            películas se transforma en un abrazo reconfortante que nos envuelve
+            en un cálido hogar, llenándola de significado y felicidad.
+          </p>
+          <p>
+            "El amor es la melodía que alegra mi corazón." Tu risa es como una
+            sinfonía que embellece mi día, y tu sonrisa ilumina mi mundo. Cada
+            gesto de cariño que me dedicas es una nota dulce que resuena en mi
+            ser, haciéndome sentir amado y valorado en todo momento.
+          </p>
+          <p>
+            En cada latido de mi corazón, en cada pensamiento que ocupa mi
+            mente, solo hay un deseo: quererte, ser tu apoyo inquebrantable. Me
+            siento afortunado de tenerte a mi lado.
+          </p>
+          <p>
+            "El amor es un sentimiento que no se puede forzar, pero tampoco se
+            puede ignorar." Aunque sé que no sientes lo mismo por mí, quiero que
+            sepas que mi amor por ti es puro y desinteresado. No importa si
+            nunca llegas a corresponder mis sentimientos, porque estaré a tu
+            lado sin importar qué. Acepto la realidad de que no siempre podemos
+            controlar a quién amamos, pero sí podemos controlar cómo amamos.
+          </p>
+          <p>
+            "Nuestro amor puede ser asimétrico, pero eso no disminuye su
+            intensidad." Cada día, mi amor crece más y más. Estoy dispuesto a
+            enfrentar la incertidumbre y la posibilidad de no ser correspondido,
+            porque tu felicidad es importante para mí. No deseo cambiar tus
+            sentimientos, sino simplemente estar presente en tu vida y ser un
+            apoyo incondicional para ti.
+          </p>
+          <p>
+            "El amor no siempre sigue el camino esperado, pero su belleza radica
+            en su capacidad de transformarnos." Aunque sé que no puedo cambiar
+            tus sentimientos, cada momento a tu lado me transforma y me hace una
+            mejor persona. Me ha enseñado la paciencia, la compasión y el
+            desprendimiento. Aunque pueda parecer un camino difícil.
+          </p>
+          <p>
+            "El amor no tiene límites ni condiciones." No importa cuánto tiempo
+            pase, ni las circunstancias que enfrentemos, siempre estaré aquí
+            para ti. Puedes contar conmigo en tus momentos de alegría y también
+            en tus momentos más difíciles. Mi amor no tiene condiciones ni
+            expectativas, solo deseo verte feliz, incluso si eso significa que
+            no esté a tu lado de la manera que yo deseo.
+          </p>
+          <p>
+            "El amor es un acto de valentía y entrega." Aunque pueda parecer
+            contradictorio, seguiré amándote a pesar de la incertidumbre y el
+            posible dolor. No puedo negar mis sentimientos ni renunciar a la
+            esperanza de que algún día, tal vez, puedas verme de la misma
+            manera. Pero incluso si eso no sucede, quiero que sepas que mi amor
+            es genuino y sincero, y siempre estaré aquí, amándote en silencio.
+          </p>
+          <p>
+            Estaré a tu lado, aceptando la realidad de tus sentimientos y
+            valorando cada momento que compartimos juntos. Eres alguien especial
+            en mi vida, y aunque el destino nos haya unido de una manera
+            diferente, seguiré amándote de la manera que puedo, con toda mi
+            alma.
+          </p>
+          <p>
+            Aunque me cueste expresarme con palabras, quiero que sepas que a
+            veces, las palabras no son suficientes para describir lo que siento,
+            pero quiero demostrarte cuánto te quiero a través de acciones y
+            gestos significativos. En cada momento que compartimos juntos, trato
+            de estar presente y prestarte atención. Observo tus gestos, tus
+            miradas y tus sonrisas, y en ellos encuentro la esencia.
+          </p>
+          <p>
+            Aunque no lo diga a menudo, tus pequeñas victorias y logros me
+            llenan de orgullo y alegría. Cada paso que das en tu camino, lo
+            celebro en silencio y te apoyo incondicionalmente. Intento recordar
+            los detalles que son importantes para ti: lo que te gusta, tus
+            sueños y tus temores, tus mascotas y mucho más. Me esfuerzo por
+            sorprenderte con pequeños gestos que demuestren que te escucho y que
+            me importa tu felicidad. Desde planear una salida aunque no salgan
+            como yo quiero, hacer cosas que te gustan, porque cada cosa que te
+            haga feliz o te diviertas me hace feliz y me divierto contigo,
+            quiero que sientas mi amor en cada momento que pasamos juntos.
+          </p>
+          <p>
+            Además, siempre estoy aquí para ti, dispuesto a escucharte cuando
+            necesites desahogarte o compartir tus preocupaciones. Puedes contar
+            conmigo en los buenos y malos momentos. Quiero que sientas que
+            tienes un apoyo inquebrantable en mí, alguien en quien confiar
+            plenamente.
+          </p>
+          <p>
+            A veces, las palabras se quedan cortas para expresar todo lo que
+            siento por ti. Pero quiero que sepas que mi amor es real, profundo y
+            verdadero. Eres alguien especial en mi vida, y aunque nuestro camino
+            no siga el rumbo que yo quisiera, siempre estaré aquí, amándote en
+            silencio y siendo un amigo fiel.
+          </p>
+          <p>Con todo mi amor,</p>
+          <p>Tu admirador secreto</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector('.hamtaro').addEventListener('click', function() {
+        document.querySelector('.carta').classList.toggle('abierta');
+        document.querySelector('.mensaje').classList.toggle('visible');
+    });
+
+    document.querySelector('.carta').addEventListener('click', function() {
+        document.querySelector('.carta').classList.toggle('abierta');
+        document.querySelector('.mensaje').classList.toggle('visible');
+    });
+</script>
+</body>
+</html>
