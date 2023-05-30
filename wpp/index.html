@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>Mensajes wpp</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="" class="logo">WhatsApp</a>
+        <div class="action">
+            <a href=""><ion-icon name="camera-outline"></ion-icon></a>
+            <a href=""><ion-icon name="search-outline"></ion-icon></a>
+            <a href=""><ion-icon name="ellipsis-vertical"></ion-icon></a>
+        </div>
+      </header>
+      <div class="tabs">
+        <input id="chats" type="radio" name="group" checked>
+        <input id="status" type="radio" name="group">
+        <input id="calls" type="radio" name="group">
+
+        <div class="buttons">
+            <label for="chats">Chats</label>
+            <label for="status">Estados</label>
+            <label for="calls">Llamadas</label>
+            <div class="underline"></div>
+          </div>
+
+          <div class="quickBtn">
+            <div class="btn message"><ion-icon name="chatbubble"></ion-icon></div>
+            <div class="btn camers">
+                <div class="pencil"><ion-icon name="pencil"></ion-icon></div>
+                <ion-icon name="camera"></ion-icon>
+            </div>
+            <div class="btn call"><ion-icon name="call"></ion-icon></div>
+          </div>
+
+          <div class="content">
+            <div class="box chats">
+                <div class="data">
+                    <div class="chatlist">
+                        <div class="block unread open">
+                            <div class="imgbx">
+                                <img src="yo.png" alt="">
+                            </div>
+                            <div class="details">
+                                <div class="listHead">
+                                    <h4>NahuelBen</h4>
+                                    <p class="time">10:56</p>
+                                </div>
+                                <div class="message_p">
+                                    <p>Algunos mensajes de wpp</p>
+                                    <b>10</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box status">
+                <div class="data">
+                    <div class="chatlist">
+                        <div class="block">
+                            <div class="imgbx">
+                                <img src="lu.jpg" alt="">
+                            </div>
+                            <div class="plus">+</div>
+                            <div class="details">
+                                <div class="listHead">
+                                    <h4>Mi estado</h4>
+                                </div>
+                                <div class="message_p">
+                                    <p>añade una actualizacion</p> 
+                                </div>
+                            </div>
+                        </div>
+                        <label for="">Actualizaciones recientes</label>
+                        <div class="block unseen">
+                            <div class="imgbx">
+                                <img src="yo.png" alt="">
+                            </div>
+                            <div class="details">
+                                <div class="listHead">
+                                    <h4>NahuelBen</h4>
+                                    <p class="time">10/6/2023</p>
+                                </div>
+                                <div class="message_p">
+                                    <p>⭐Lo ví y me acordé de vos</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label for="">Actualizaciones vistas</label>
+                    </div>
+                </div>
+            </div>
+            <div class="box calls">
+                <div class="data">
+                    <div class="chatlist">
+                        <div class="block">
+                            <div class="imgbx green">
+                                <ion-icon name="link"></ion-icon>
+                            </div>
+                            <div class="details">
+                                <div class="listHead">
+                                    <h4>Crear enlace de llamada</h4>
+                                </div>
+                                <div class="message_p">
+                                    <p>Comparte un enlace para tu llamada de WhatsApp</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label for="">Recientes</label>
+                        <div class="block">
+                            <div class="imgbx">
+                                <img src="yo.png" alt="">
+                            </div>
+                            <div class="details">
+                                <div class="listHead">
+                                    <h4>NahuelBen</h4>
+                                </div>
+                                <div class="message_p outgoing">
+                                    <p><ion-icon name="arrow-up"></ion-icon>(4) 20 de enero, 6:39 p.m</p>
+                                </div>
+                            </div>
+                            <ion-icon name="call" class="call"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+      <div class="chatBox hide">
+        <div class="chat_Header">
+            <div class="imgcontent">
+                <ion-icon name="arrow-back" class="back"></ion-icon>
+                <div class="imgBx">
+                    <img src="yo.png" alt="">
+                </div>
+                <h3>NahuelBen <br><span>Online</span></h3>
+            </div>
+            <div class="actionBtns">
+                <ion-icon name="videocam"></ion-icon>
+                <ion-icon name="call"></ion-icon>
+                <ion-icon name="ellipsis-vertical"></ion-icon>
+            </div>
+        </div>
+        <div class="messageBox">
+            <div class="message">Algunos mensajes de wpp <br> <span class="time">4:10</span></div>
+
+            <div class="messageInput">
+                <div class="input">
+                    <ion-icon name="happy-outline"></ion-icon>
+                    <input type="text" placeholder="Message">
+                    <ion-icon name="attach-outline" class="deg45"></ion-icon>
+                    <ion-icon name="camera"></ion-icon>
+                </div>
+                <div class="mic"><ion-icon name="mic"></ion-icon></div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script>
+        let back = document.querySelector('.back');
+        let chatBox = document.querySelector('.chatBox');
+        let open = document.querySelector('.open');
+
+        back.onclick = function(){
+            chatBox.classList.add('hide');
+        }
+
+        open.onclick = function(){
+            chatBox.classList.remove('hide');
+        }
+    </script>
+  </body>
+</html>
