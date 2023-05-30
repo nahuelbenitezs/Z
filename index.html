@@ -65,11 +65,80 @@
       p {
         margin: 0;
       }
+
+      /*hamtaro inferior derecha*/
+      .hamtaro-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+.hamtaro-image {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+}
+
+.hamtaro-text {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+a{
+    text-decoration:none;
+}
+
+/*GIF*/
+.gif-container {
+  position: fixed;
+  bottom: 20px; /* Ajusta la posición verticalmente */
+  left: 20px; /* Ajusta la posición horizontalmente */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.gif-text {
+  background-color: rgba(0, 0, 0, 0.7); /* Ajusta el color de fondo del texto */
+  color: #fff; /* Ajusta el color del texto */
+  padding: 10px;
+  font-size: 15px;
+}
+
+.gif-image {
+  width: 200px; /* Ajusta el tamaño del GIF */
+}
+
+
     </style>
   </head>
   <body>
+    <div class="gif-container">
+        <div class="gif-text">
+          STICKER HECHO PARA TI
+        </div>
+        <img class="gif-image" src="foryou.gif" alt="GIF">
+      </div>
+
+    <div class="hamtaro-container">
+        <a href="https://youtu.be/x_mAYclizD0">
+        <div class="hamtaro-text">
+          Pulsa en mi para ver el AMV.
+        </div> </a>
+        <img class="hamtaro-image" src="hamtaro.png" alt="Hamtaro">
+      </div>
     <div class="container">
-      <img class="hamtaro" src="Hamtaro.png" alt="Hamtaro" />
+        <a href="https://youtu.be/x_mAYclizD0">
+      <img class="hamtaro" src="Hamtaro.png" alt="Hamtaro" /></a>
       <div class="">
         <p><b> Una carta para ti!</b></p>
       </div>
