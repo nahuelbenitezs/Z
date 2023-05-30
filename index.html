@@ -151,7 +151,7 @@
           sans-serif;
         color: var(--txt-color);
         text-align: left;
-        font-size: 10px;
+        font-size: 12px;
       }
       .heart {
         position: absolute;
@@ -193,6 +193,41 @@
       .flap > .heart {
         transform: rotate(90deg);
         transition-delay: 0.4s;
+      }
+
+      /*screen max-width 375px*/
+      @media screen and (max-width: 375px) {
+        /* Estilos para dispositivos con ancho máximo de 480px */
+        .container {
+          padding: 10px;
+        }
+
+        .gif-container {
+          top: 5px;
+          left: 10px;
+        }
+
+        .gif-text {
+          font-size: 5px;
+        }
+
+        .gif-image {
+          width: 22%;
+        }
+
+        .hamtaro-container {
+          bottom: 10px;
+          right: 10px;
+          padding: 5px;
+        }
+
+        .hamtaro-text {
+          font-size: 12px;
+        }
+
+        .heart {
+          top: 72%;
+        }
       }
     </style>
   </head>
