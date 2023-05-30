@@ -74,7 +74,7 @@
       /*GIF*/
       .gif-container {
         position: fixed;
-        bottom: 80%; /* Ajusta la posición verticalmente */
+        top: 10px; /* Ajusta la posición verticalmente */
         left: 20px; /* Ajusta la posición horizontalmente */
         display: flex;
         flex-direction: column;
@@ -94,7 +94,7 @@
       }
 
       .gif-image {
-        width: 130px; /* Ajusta el tamaño del GIF */
+        width: 35%; /* Ajusta el tamaño del GIF */
       }
 
       /* CARTA FINAL */
@@ -102,11 +102,14 @@
       .container > .envelope-wrapper {
         background: var(--bg-envelope-color);
         box-shadow: 0 0 40px var(--shadow-color);
+        width: 90%;
+        max-width: 300px;
+        margin-top: 20px;
       }
       .envelope-wrapper > .envelope {
         position: relative;
-        width: 300px;
-        height: 230px;
+        width: 100%;
+        padding-bottom: 70%;
       }
       .envelope-wrapper > .envelope::before {
         content: "";
@@ -122,9 +125,8 @@
       .envelope-wrapper > .envelope::after {
         content: "";
         position: absolute;
-        z-index: 2;
-        width: 0px;
-        height: 0px;
+        z-index: 1;
+        top: 0;
         border-top: 130px solid transparent;
         border-right: 150px solid var(--envelope-cover);
         border-bottom: 100px solid var(--envelope-cover);
@@ -153,7 +155,7 @@
       }
       .heart {
         position: absolute;
-        top: 65%;
+        top: 68%;
         left: 50%;
         width: 15px;
         height: 15px;
