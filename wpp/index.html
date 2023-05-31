@@ -12,7 +12,6 @@
     <title>Mensajes wpp</title>
   </head>
   <body>
-
     <div class="container">
       <header>
         <a href="" class="logo">WhatsApp</a>
@@ -345,7 +344,6 @@
       </div>
     </div>
 
-
     <audio id="player" preload="auto" loop>
       <source id="audio-source" src="destino.mp3" type="audio/mpeg" />
     </audio>
@@ -363,20 +361,24 @@
 
           <div class="progress">
             <input
-            id="progress-slider"
-            type="range"
-            min="0"
-            max="100"
-            step="0.1"
-            value="0"
-            class="slider bar"
-          />
+              id="progress-slider"
+              type="range"
+              min="0"
+              max="100"
+              step="0.1"
+              value="0"
+              class="slider bar"
+            />
           </div>
 
           <div class="controls-holder">
             <div class="controls">
               <ion-icon name="play-back-sharp"></ion-icon>
-              <ion-icon name="play-circle-outline" id="play-btn" class="pause"></ion-icon>
+              <ion-icon
+                name="play-circle-outline"
+                id="play-btn"
+                class="pause"
+              ></ion-icon>
               <ion-icon name="play-forward-sharp"></ion-icon>
             </div>
           </div>
@@ -406,52 +408,101 @@
         chatBox.classList.remove("hide");
       };
 
-        /*SCRIPT AUDIO*/
-        let isPlaying = false;
-        let progressSliderDragging = false;
-  
-        window.onload = () => {
-          const player = document.getElementById("player");
-          const playBtn = document.getElementById("play-btn");
-          const progressSlider = document.getElementById("progress-slider");
-  
-          playBtn.addEventListener("click", () => {
-            if (!isPlaying) {
-              playBtn.setAttribute('name', 'pause-circle-outline');
-              player.play();
-              isPlaying = true;
-            } else {
-              playBtn.setAttribute('name', 'play-circle-outline');
-              
-              player.pause();
-              isPlaying = false;
-            }
-          });
-  
-          progressSlider.addEventListener("input", () => {
-            const progress = progressSlider.value;
+      /*SCRIPT AUDIO*/
+      let isPlaying = false;
+      let progressSliderDragging = false;
+
+      window.onload = () => {
+        const player = document.getElementById("player");
+        const playBtn = document.getElementById("play-btn");
+        const progressSlider = document.getElementById("progress-slider");
+
+        playBtn.addEventListener("click", () => {
+          if (!isPlaying) {
+            playBtn.setAttribute("name", "pause-circle-outline");
+            player.play();
+            isPlaying = true;
+          } else {
+            playBtn.setAttribute("name", "play-circle-outline");
+
+            player.pause();
+            isPlaying = false;
+          }
+        });
+
+        progressSlider.addEventListener("input", () => {
+          const progress = progressSlider.value;
+          const duration = player.duration;
+          const currentTime = (progress * duration) / 100;
+          player.currentTime = currentTime;
+        });
+
+        player.addEventListener("timeupdate", () => {
+          if (!progressSliderDragging) {
+            const currentTime = player.currentTime;
             const duration = player.duration;
-            const currentTime = (progress * duration) / 100;
-            player.currentTime = currentTime;
-          });
-  
-          player.addEventListener("timeupdate", () => {
-            if (!progressSliderDragging) {
-              const currentTime = player.currentTime;
-              const duration = player.duration;
-              const progress = (currentTime / duration) * 100;
-              progressSlider.value = progress;
-            }
-          });
-  
-          progressSlider.addEventListener("mousedown", () => {
-            progressSliderDragging = true;
-          });
-  
-          progressSlider.addEventListener("mouseup", () => {
-            progressSliderDragging = false;
-          });
-        };
+            const progress = (currentTime / duration) * 100;
+            progressSlider.value = progress;
+          }
+        });
+
+        progressSlider.addEventListener("mousedown", () => {
+          progressSliderDragging = true;
+        });
+
+        progressSlider.addEventListener("mouseup", () => {
+          progressSliderDragging = false;
+        });
+      };
+
+      /*scroll*/
+
+      const container = document.querySelector('.container');
+
+let currentTabIndex = 0;
+
+container.addEventListener('touchstart', handleTouchStart, false);
+container.addEventListener('touchmove', handleTouchMove, false);
+
+let xDown = null;
+
+function handleTouchStart(event) {
+  xDown = event.touches[0].clientX;
+}
+
+function handleTouchMove(event) {
+  if (!xDown) {
+    return;
+  }
+
+  const xDiff = xDown - event.touches[0].clientX;
+
+  if (xDiff > 0) {
+    // Deslizamiento hacia la izquierda
+    if (currentTabIndex === 0) {
+      document.getElementById('status').checked = true;
+      currentTabIndex = 1;
+    } else if (currentTabIndex === 1) {
+      document.getElementById('calls').checked = true;
+      currentTabIndex = 2;
+    } 
+    else if (currentTabIndex === 2) {
+      document.getElementById('chats').checked = true;
+      currentTabIndex = 0;
+    } 
+  } else {
+    // Deslizamiento hacia la derecha
+    if (currentTabIndex === 2) {
+      document.getElementById('status').checked = true;
+      currentTabIndex = 1;
+    } else if (currentTabIndex === 1) {
+      document.getElementById('chats').checked = true;
+      currentTabIndex = 0;
+    }
+  }
+
+  xDown = null;
+}
     </script>
   </body>
 </html>
