@@ -8,6 +8,19 @@
     <title>Mensajes wpp</title>
   </head>
   <body>
+    <div id="audio-popup" class="audio-popup">
+      <div class="audio-player">
+        <div class="song-info">
+          <img id="song-image" src="becerra.png" alt="Imagen de la canción">
+          <h3 id="song-title">DESAFIANDO EL DESTINO</h3>
+        </div>
+        <audio id="audio-element" src="destino.mp3"></audio>
+        <div class="audio-controls">
+          <button id="play-button"><ion-icon name="play"></ion-icon></button>
+          <button id="pause-button"><ion-icon name="pause"></ion-icon></button>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <header>
         <a href="" class="logo">WhatsApp</a>
@@ -293,10 +306,20 @@
               <br />
               <span class="time">26/4/2023</span>
             </div>
-            <div class="message">
+              <div class="message">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4rBQxFVwTnf99p818azSon?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <br />
+                <span class="time">23/5/2023</span>
+              </div>
+              <div class="message">
+                Desde ayer no pude dormir cuando me pasaste la canción, la letra llego muy fuerte a mi corazón y no pare de intentarla tocar en el piano, vi tu ultimo mensaje en el lol y no me tienes que pedir perdón por existir, estoy muy feliz que pasaras por mi vida, y por eso es que te quiero tanto, tanto que cada dia escucho cada latido de mi corazón que me susurra e intenta expresar cuánto te quiero y duele, pero nada de esto va a hacer que me aleje de ti, quiero que seas feliz, quiero acompañarte en tus momentos bonitos, como en los malos y en tus desafíos, y si un dia quieres llorar, te acompaño y lloro contigo si hace falta.
+                <br />
+                <span class="time">23/5/2023</span>
+              </div>
+              <div class="message">
                 Hay muchos mas pero no terminaria mas ❤️
                 <br />
-                <span class="time">10/6/2023</span>
+                <span class="time">23/5/2023</span>
               </div>
           </div>
           <div class="messageInput">
@@ -332,6 +355,17 @@
       open.onclick = function () {
         chatBox.classList.remove("hide");
       };
+
+      document.getElementById('play-button').addEventListener('click', function() {
+  document.getElementById('audio-element').play();
+});
+
+document.getElementById('pause-button').addEventListener('click', function() {
+  document.getElementById('audio-element').pause();
+});
+
+
+
     </script>
   </body>
 </html>
