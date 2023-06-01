@@ -28,7 +28,9 @@ body {
   background: #fff;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+  margin-bottom: 20px;
 }
+
 
 header {
   position: relative;
@@ -37,6 +39,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+ 
 }
 
 header .logo {
@@ -62,6 +65,7 @@ header .action a {
 .tabs input {
   visibility: hidden;
   display: none;
+  
 }
 
 .buttons {
@@ -162,6 +166,7 @@ header .action a {
 .chatlist .block .imgbx {
   position: relative;
   min-width: 45px;
+  max-width: 60px;
   height: 45px;
   overflow: hidden;
   border-radius: 50%;
@@ -525,7 +530,7 @@ ion-icon {
 /*reproductor*/
 
 .containerPlay {
-  position: absolute;
+  position: fixed;
   background-color: #fff;
   height: 140px;
   width: 90%;
@@ -543,9 +548,10 @@ ion-icon {
   top: 5px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     .containerPlay {
       width: 90%; /* Ancho completo para dispositivos móviles */
       height: 104px;
