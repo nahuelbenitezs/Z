@@ -134,23 +134,8 @@ img {
 }
 
 .home__parallax-img1 {
-  background-image: url("/5.jpg");
+  background-image: url("/assets/img/5.jpg");
   z-index: var(--z-normal);
-}
-
-.home__parallax-img2 {
-  background-image: url("/assets/img/imgm2.png");
-  z-index: var(--z-tooltip);
-}
-
-.home__parallax-img3 {
-  background-image: url("/assets/img/imgm3.png");
-  z-index: var(--z-fixed);
-}
-
-.home__parallax-img4 {
-  background-image: url("/assets/img/imgm4.png");
-  z-index: var(--z-fixed);
 }
 
 .home__title, .home__subtitle {
