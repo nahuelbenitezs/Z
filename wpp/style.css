@@ -741,3 +741,10 @@ ion-icon {
   background-color: var(--bg);
   border-radius: 5px;
 }
+
+
+@media only screen and (-webkit-min-device-pixel-ratio: 3) , only screen and (max-width: 414px){
+  .container{
+    margin-bottom: -106px;
+  }
+}
