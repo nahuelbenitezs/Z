@@ -27,44 +27,44 @@
             </form>
         </div>
 
-        <!--Resumen Financiero-->
-        <div class="mb-3">
-            <label for="initialBalance" class="form-label">Dinero Total Inicial</label>
-            <input type="number" step="0.01" class="form-control" id="initialBalance"
-                placeholder="Ingresa el monto inicial">
-            <button id="setInitialBalance" class="btn btn-secondary mt-2">Guardar Monto Inicial</button>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-4 mb-3">
-                <div class="card text-white bg-primary">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Gastado</h5>
-                        <p class="card-text" id="totalSpent">$0.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 mb-3">
-                <div class="card text-white bg-success">
-                    <div class="card-body">
-                        <h5 class="card-title">Ganancia Total</h5>
-                        <p class="card-text" id="totalProfit">$0.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 mb-3">
-                <div class="card text-white bg-warning">
-                    <div class="card-body">
-                        <h5 class="card-title">Dinero Total Disponible</h5>
-                        <p class="card-text" id="totalBalance">$0.00</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <!-- Product Management Section -->
         <div id="productSection" style="display: none;">
+            
+            <!-- Resumen Financiero -->
+            <div class="mb-3">
+                <label for="initialBalance" class="form-label">Dinero Total Inicial</label>
+                <input type="number" step="0.01" class="form-control" id="initialBalance"
+                    placeholder="Ingresa el monto inicial">
+                <button id="setInitialBalance" class="btn btn-secondary mt-2">Guardar Monto Inicial</button>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4 mb-3">
+                    <div class="card text-white bg-primary">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Gastado</h5>
+                            <p class="card-text" id="totalSpent">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <div class="card text-white bg-success">
+                        <div class="card-body">
+                            <h5 class="card-title">Ganancia Total</h5>
+                            <p class="card-text" id="totalProfit">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <div class="card text-white bg-warning">
+                        <div class="card-body">
+                            <h5 class="card-title">Dinero Total Disponible</h5>
+                            <p class="card-text" id="totalBalance">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <h2>Lu gestion</h2>
 
             <form id="productForm" class="mb-4">
