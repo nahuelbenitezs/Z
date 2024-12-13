@@ -26,72 +26,89 @@
         </div>
 
         <!-- Product Management Section -->
-        <div id="productSection" style="display: none;">
-            <h2>Lu gestion</h2>
+        <div class="product-section mt-5">
+            <h2>Lu gestiones</h2>
 
             <form id="productForm" class="mb-4">
-                <div class="mb-3">
-                    <label for="productName" class="form-label">Nombre del Producto</label>
-                    <input type="text" class="form-control" id="productName" required>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="productName" class="form-label">Nombre del Producto</label>
+                        <input type="text" class="form-control" id="productName" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="productPhoto" class="form-label">URL de la Foto</label>
+                        <input type="url" class="form-control" id="productPhoto">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="productPurchasePrice" class="form-label">Precio de Compra</label>
+                        <input type="number" step="0.01" class="form-control" id="productPurchasePrice" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="productSalePrice" class="form-label">Precio de Venta</label>
+                        <input type="number" step="0.01" class="form-control" id="productSalePrice" required>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="productStock" class="form-label">Stock</label>
+                        <input type="number" class="form-control" id="productStock" required>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="productPhoto" class="form-label">URL de la Foto</label>
-                    <input type="url" class="form-control" id="productPhoto">
-                </div>
-                <div class="mb-3">
-                    <label for="productPurchasePrice" class="form-label">Precio de Compra</label>
-                    <input type="number" step="0.01" class="form-control" id="productPurchasePrice" required>
-                </div>
-                <div class="mb-3">
-                    <label for="productSalePrice" class="form-label">Precio de Venta</label>
-                    <input type="number" step="0.01" class="form-control" id="productSalePrice" required>
-                </div>
-                <div class="mb-3">
-                    <label for="productStock" class="form-label">Stock</label>
-                    <input type="number" class="form-control" id="productStock" required>
-                </div>
-                <button type="submit" class="btn btn-success">Agregar Producto</button>
+                <button type="submit" class="btn btn-custom mt-3">Agregar Producto</button>
             </form>
 
             <h3>Lista de Productos</h3>
-            <table class="table table-responsive">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Foto</th>
-                        <th>Precio de Compra</th>
-                        <th>Precio de Venta</th>
-                        <th>Stock</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="productTableBody"></tbody>
-            </table>
-
-            <h3>Historial de Ventas</h3>
-            <table class="table table-responsive">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Fecha</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody id="salesHistoryBody"></tbody>
-            </table>
-
-            <h3>Resumen Financiero</h3>
-            <div class="mb-3">
-                <label for="initialBalance" class="form-label">Dinero Total Inicial</label>
-                <input type="number" step="0.01" class="form-control" id="initialBalance" placeholder="Ingresa el monto inicial">
-                <button id="setInitialBalance" class="btn btn-secondary mt-2">Guardar Monto Inicial</button>
+            <div class="card">
+                <div class="card-header">Productos Registrados</div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Foto</th>
+                                <th>Precio de Compra</th>
+                                <th>Precio de Venta</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody"></tbody>
+                    </table>
+                </div>
             </div>
-            <p>Total Gastado: <span id="totalSpent">$0.00</span></p>
-            <p>Ganancia Total: <span id="totalProfit">$0.00</span></p>
-            <p>Dinero Total Disponible: <span id="totalBalance">$0.00</span></p>
 
-            <button id="logoutButton" class="btn btn-danger">Cerrar Sesión</button>
+            <h3 class="mt-4">Historial de Ventas</h3>
+            <div class="card">
+                <div class="card-header">Ventas Realizadas</div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="salesHistoryBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h3 class="mt-4">Resumen Financiero</h3>
+            <div class="card">
+                <div class="card-header">Detalles Financieros</div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="initialBalance" class="form-label">Dinero Total Inicial</label>
+                        <input type="number" step="0.01" class="form-control" id="initialBalance" placeholder="Ingresa el monto inicial">
+                        <button id="setInitialBalance" class="btn btn-custom mt-2">Guardar Monto Inicial</button>
+                    </div>
+                    <p>Total Gastado: <span id="totalSpent">$0.00</span></p>
+                    <p>Ganancia Total: <span id="totalProfit">$0.00</span></p>
+                    <p>Dinero Total Disponible: <span id="totalBalance">$0.00</span></p>
+                </div>
+            </div>
+
+            <button id="logoutButton" class="btn btn-danger mt-4">Cerrar Sesión</button>
         </div>
     </div>
 
