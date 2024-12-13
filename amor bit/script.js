@@ -16,165 +16,147 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-document.addEventListener("DOMContentLoaded", async () => {
-    const loginForm = document.getElementById("loginForm");
-    const productSection = document.getElementById("productSection");
-    const logoutButton = document.getElementById("logoutButton");
+let totalSpent = 0;
+let totalProfit = 0;
 
-    loginForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
+// DOM Elements
+const loginForm = document.getElementById("loginForm");
+const productSection = document.getElementById("productSection");
+const productForm = document.getElementById("productForm");
+const productTableBody = document.getElementById("productTableBody");
+const salesHistoryBody = document.getElementById("salesHistoryBody");
+const totalSpentDisplay = document.getElementById("totalSpent");
+const totalProfitDisplay = document.getElementById("totalProfit");
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                loginForm.style.display = "none";
-                productSection.style.display = "block";
-            })
-            .catch((error) => {
-                alert("Error de inicio de sesión: " + error.message);
-            });
+// Functions
+async function updateFinancialSummary() {
+    totalSpentDisplay.textContent = `$${totalSpent.toFixed(2)}`;
+    totalProfitDisplay.textContent = `$${totalProfit.toFixed(2)}`;
+}
+
+async function renderProducts() {
+    productTableBody.innerHTML = "";
+    const querySnapshot = await getDocs(collection(db, "products"));
+    querySnapshot.forEach((doc) => {
+        const product = doc.data();
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${product.name}</td>
+            <td>${product.photo ? `<img src="${product.photo}" alt="${product.name}" style="width: 50px; height: 50px;">` : "N/A"}</td>
+            <td>$${product.purchasePrice.toFixed(2)}</td>
+            <td>$${product.salePrice.toFixed(2)}</td>
+            <td>${product.stock}</td>
+            <td>
+                <button class="btn btn-danger btn-sm" onclick="deleteProduct('${doc.id}')">Eliminar</button>
+                <button class="btn btn-success btn-sm" onclick="sellProduct('${doc.id}', ${product.stock}, ${product.salePrice}, ${product.purchasePrice})">Vender</button>
+            </td>
+        `;
+        productTableBody.appendChild(row);
+    });
+}
+
+async function renderSalesHistory() {
+    salesHistoryBody.innerHTML = "";
+    const querySnapshot = await getDocs(collection(db, "salesHistory"));
+    querySnapshot.forEach((doc) => {
+        const sale = doc.data();
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${sale.productName}</td>
+            <td>${sale.quantity}</td>
+            <td>${sale.date}</td>
+            <td>$${sale.total.toFixed(2)}</td>
+        `;
+        salesHistoryBody.appendChild(row);
+    });
+}
+
+window.deleteProduct = async (id) => {
+    await deleteDoc(doc(db, "products", id));
+    await renderProducts();
+};
+
+window.sellProduct = async (id, stock, salePrice, purchasePrice) => {
+    const quantity = parseInt(prompt("Ingrese la cantidad vendida:"));
+    if (isNaN(quantity) || quantity <= 0) {
+        alert("Cantidad no válida.");
+        return;
+    }
+
+    if (quantity > stock) {
+        alert("No hay suficiente stock disponible.");
+        return;
+    }
+
+    const newStock = stock - quantity;
+    const saleTotal = salePrice * quantity;
+    const purchaseTotal = purchasePrice * quantity;
+
+    await updateDoc(doc(db, "products", id), { stock: newStock });
+    await addDoc(collection(db, "salesHistory"), {
+        productName: id,
+        quantity,
+        date: new Date().toLocaleDateString(),
+        total: saleTotal,
     });
 
-    logoutButton.addEventListener("click", () => {
-        signOut(auth)
-            .then(() => {
-                productSection.style.display = "none";
-                loginForm.style.display = "block";
-            })
-            .catch((error) => {
-                alert("Error al cerrar sesión: " + error.message);
-            });
-    });
+    totalProfit += saleTotal - purchaseTotal;
+    await updateFinancialSummary();
+    await renderProducts();
+    await renderSalesHistory();
+};
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
+// Authentication
+loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
             loginForm.style.display = "none";
             productSection.style.display = "block";
-            initializeCRUD();
-        } else {
-            loginForm.style.display = "block";
-            productSection.style.display = "none";
-        }
-    });
-
-    async function initializeCRUD() {
-        const productForm = document.getElementById("productForm");
-        const productTableBody = document.getElementById("productTableBody");
-        const salesHistoryBody = document.getElementById("salesHistoryBody");
-        const totalSpent = document.getElementById("totalSpent");
-        const totalProfit = document.getElementById("totalProfit");
-
-        const productsRef = collection(db, "products");
-        const salesRef = collection(db, "salesHistory");
-
-        let totalSpentAmount = 0;
-        let totalProfitAmount = 0;
-
-        productForm.addEventListener("submit", async (event) => {
-            event.preventDefault();
-
-            const productName = document.getElementById("productName").value;
-            const productPhoto = document.getElementById("productPhoto").value;
-            const productPurchasePrice = parseFloat(document.getElementById("productPurchasePrice").value);
-            const productSalePrice = parseFloat(document.getElementById("productSalePrice").value);
-            const productStock = parseInt(document.getElementById("productStock").value);
-
-            const product = {
-                name: productName,
-                photo: productPhoto,
-                purchasePrice: productPurchasePrice,
-                salePrice: productSalePrice,
-                stock: productStock,
-            };
-
-            await addDoc(productsRef, product);
-            totalSpentAmount += productPurchasePrice * productStock;
-            updateFinancialSummary();
-            renderProducts();
-            productForm.reset();
+        })
+        .catch((error) => {
+            alert("Error de inicio de sesión: " + error.message);
         });
+});
 
-        async function renderProducts() {
-            productTableBody.innerHTML = "";
-            const querySnapshot = await getDocs(productsRef);
-            querySnapshot.forEach((doc) => {
-                const product = doc.data();
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${product.name}</td>
-                    <td>${product.photo ? `<img src="${product.photo}" alt="${product.name}" style="width: 50px; height: 50px;">` : "N/A"}</td>
-                    <td>$${product.purchasePrice.toFixed(2)}</td>
-                    <td>$${product.salePrice.toFixed(2)}</td>
-                    <td>${product.stock}</td>
-                    <td>
-                        <button class="btn btn-success btn-sm" onclick="sellProduct('${doc.id}', ${product.stock}, ${product.salePrice}, ${product.purchasePrice})">Vender</button>
-                        <button class="btn btn-danger btn-sm" onclick="deleteProduct('${doc.id}')">Eliminar</button>
-                    </td>
-                `;
-                productTableBody.appendChild(row);
-            });
-        }
-
-        window.deleteProduct = async (id) => {
-            await deleteDoc(doc(db, "products", id));
-            renderProducts();
-        };
-
-        window.sellProduct = async (id, stock, salePrice, purchasePrice) => {
-            const quantity = parseInt(prompt("Ingrese la cantidad vendida:"));
-            if (isNaN(quantity) || quantity <= 0) {
-                alert("Cantidad no válida.");
-                return;
-            }
-
-            if (quantity > stock) {
-                alert("No hay suficiente stock disponible.");
-                return;
-            }
-
-            const newStock = stock - quantity;
-            const saleTotal = salePrice * quantity;
-            const purchaseTotal = purchasePrice * quantity;
-
-            await updateDoc(doc(db, "products", id), { stock: newStock });
-
-            await addDoc(salesRef, {
-                productName: id,
-                quantity,
-                date: new Date().toLocaleDateString(),
-                total: saleTotal,
-            });
-
-            totalProfitAmount += saleTotal - purchaseTotal;
-            updateFinancialSummary();
-            renderProducts();
-            renderSalesHistory();
-        };
-
-        async function renderSalesHistory() {
-            salesHistoryBody.innerHTML = "";
-            const querySnapshot = await getDocs(salesRef);
-            querySnapshot.forEach((doc) => {
-                const sale = doc.data();
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${sale.productName}</td>
-                    <td>${sale.quantity}</td>
-                    <td>${sale.date}</td>
-                    <td>$${sale.total.toFixed(2)}</td>
-                `;
-                salesHistoryBody.appendChild(row);
-            });
-        }
-
-        function updateFinancialSummary() {
-            totalSpent.textContent = `$${totalSpentAmount.toFixed(2)}`;
-            totalProfit.textContent = `$${totalProfitAmount.toFixed(2)}`;
-        }
-
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        loginForm.style.display = "none";
+        productSection.style.display = "block";
         renderProducts();
         renderSalesHistory();
         updateFinancialSummary();
+    } else {
+        loginForm.style.display = "block";
+        productSection.style.display = "none";
     }
+});
+
+const logoutButton = document.getElementById("logoutButton");
+logoutButton.addEventListener("click", () => {
+    signOut(auth).then(() => {
+        productSection.style.display = "none";
+        loginForm.style.display = "block";
+    });
+});
+
+productForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("productName").value;
+    const photo = document.getElementById("productPhoto").value;
+    const purchasePrice = parseFloat(document.getElementById("productPurchasePrice").value);
+    const salePrice = parseFloat(document.getElementById("productSalePrice").value);
+    const stock = parseInt(document.getElementById("productStock").value);
+
+    const product = { name, photo, purchasePrice, salePrice, stock };
+
+    await addDoc(collection(db, "products"), product);
+    totalSpent += purchasePrice * stock;
+    await updateFinancialSummary();
+    await renderProducts();
+    productForm.reset();
 });
