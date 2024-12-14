@@ -34,6 +34,7 @@ async function updateFinancialSummary() {
 
     totalSpentDisplay.textContent = `$${totalSpent.toFixed(2)}`;
     totalProfitDisplay.textContent = `$${totalProfit.toFixed(2)}`;
+    totalBalanceDisplay.textContent = `$${initialBalance.toFixed(2)}`;
 
 }
 
@@ -76,24 +77,25 @@ async function renderSalesHistory() {
 }
 
 window.deleteProduct = async (id) => {
-     // Obtén el producto antes de eliminarlo para saber cuánto gastaste en él
-     const productDoc = await getDoc(doc(db, "products", id));
-     if (productDoc.exists()) {
-         const productData = productDoc.data();
-         const productTotalSpent = productData.purchasePrice * productData.stock;
- 
-         // Elimina el producto de Firebase
-         await deleteDoc(doc(db, "products", id));
- 
-         // Actualiza el total gastado
-         totalSpent -= productTotalSpent;
-         await updateFinancialSummary(); // Actualiza el resumen financiero
-         await renderProducts(); // Vuelve a renderizar los productos
-     }
+    // Obtén el producto antes de eliminarlo para saber cuánto gastaste en él
+    const productDoc = await getDoc(doc(db, "products", id));
+    if (productDoc.exists()) {
+        const productData = productDoc.data();
+        const productTotalSpent = productData.purchasePrice * productData.stock;
+
+        // Elimina el producto de Firebase
+        await deleteDoc(doc(db, "products", id));
+
+        // Actualiza el total gastado
+        totalSpent -= productTotalSpent;
+        await updateFinancialSummary(); // Actualiza el resumen financiero
+        await renderProducts(); // Vuelve a renderizar los productos
+    }
 };
 
 window.sellProduct = async (id, stock, salePrice, purchasePrice) => {
     const quantity = parseInt(prompt("Ingrese la cantidad vendida:"));
+
     if (isNaN(quantity) || quantity <= 0) {
         alert("Cantidad no válida.");
         return;
@@ -108,7 +110,10 @@ window.sellProduct = async (id, stock, salePrice, purchasePrice) => {
     const saleTotal = salePrice * quantity;
     const purchaseTotal = purchasePrice * quantity;
 
+    //actualiza el stock en firestore
     await updateDoc(doc(db, "products", id), { stock: newStock });
+
+    //registra la venta en el historial
     await addDoc(collection(db, "salesHistory"), {
         productName: id,
         quantity,
@@ -117,6 +122,13 @@ window.sellProduct = async (id, stock, salePrice, purchasePrice) => {
     });
 
     totalProfit += saleTotal - purchaseTotal;
+    console.log(saleTotal)
+    initialBalance += saleTotal;
+
+    // Actualizar el balance en Firestore
+    const balanceDocRef = doc(db, "financialSummary", "initialBalance");
+    await setDoc(balanceDocRef, { initialBalance });  // Guardar el nuevo balance en Firebase
+
     await updateFinancialSummary();
     await renderProducts();
     await renderSalesHistory();
