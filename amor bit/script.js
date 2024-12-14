@@ -1,6 +1,6 @@
 // Firebase configuration and initialization
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, updateDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDoc, updateDoc, doc, deleteDoc, setDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 
 const firebaseConfig = {
@@ -27,6 +27,7 @@ const productTableBody = document.getElementById("productTableBody");
 const salesHistoryBody = document.getElementById("salesHistoryBody");
 const totalSpentDisplay = document.getElementById("totalSpent");
 const totalProfitDisplay = document.getElementById("totalProfit");
+
 
 // Functions
 async function updateFinancialSummary() {
@@ -160,3 +161,64 @@ productForm.addEventListener("submit", async (e) => {
     await renderProducts();
     productForm.reset();
 });
+
+
+//monto inicial
+
+const initialBalanceInput = document.getElementById("initialBalance");
+const totalBalanceDisplay = document.getElementById("totalBalance");
+const setInitialBalanceButton = document.getElementById("setInitialBalance");
+
+let initialBalance = 0; // Variable para guardar el monto inicial
+
+async function updateTotalBalance() {
+    const totalBalance = initialBalance + totalProfit - totalSpent;
+    totalBalanceDisplay.textContent = `$${totalBalance.toFixed(2)}`;
+}
+
+setInitialBalanceButton.addEventListener("click", async () => {
+    const balance = parseFloat(initialBalanceInput.value);
+
+    if (isNaN(balance) || balance < 0) {
+        alert("Por favor, ingresa un monto válido.");
+        return;
+    }
+
+    initialBalance = balance;
+
+    // Guardar en Firebase
+    const balanceDocRef = doc(db, "financialSummary", "initialBalance");
+    await setDoc(balanceDocRef, { initialBalance: balance });
+
+    await updateTotalBalance();
+    alert("Monto inicial guardado correctamente.");
+});
+
+// Recuperar el balance inicial al cargar
+async function loadInitialBalance() {
+    const balanceDocRef = doc(db, "financialSummary", "initialBalance");
+    const docSnap = await getDoc(balanceDocRef);
+
+    if (docSnap.exists()) {
+        initialBalance = docSnap.data().initialBalance;
+        initialBalanceInput.value = initialBalance;
+        await updateTotalBalance();
+    }
+}
+
+// Cargar datos iniciales al iniciar sesión
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        loginForm.style.display = "none";
+        productSection.style.display = "block";
+        renderProducts();
+        renderSalesHistory();
+        loadInitialBalance(); // Cargar el balance inicial
+        updateFinancialSummary();
+    } else {
+        loginForm.style.display = "block";
+        productSection.style.display = "none";
+    }
+});
+
+
