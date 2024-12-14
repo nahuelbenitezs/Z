@@ -123,12 +123,14 @@ loginForm.addEventListener("submit", (e) => {
         });
 });
 
+// Cargar datos iniciales al iniciar sesión
 onAuthStateChanged(auth, (user) => {
     if (user) {
         loginForm.style.display = "none";
         productSection.style.display = "block";
         renderProducts();
         renderSalesHistory();
+        loadInitialBalance(); // Cargar el balance inicial
         updateFinancialSummary();
     } else {
         loginForm.style.display = "block";
@@ -205,20 +207,5 @@ async function loadInitialBalance() {
         await updateTotalBalance();
     }
 }
-
-// Cargar datos iniciales al iniciar sesión
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        loginForm.style.display = "none";
-        productSection.style.display = "block";
-        renderProducts();
-        renderSalesHistory();
-        loadInitialBalance(); // Cargar el balance inicial
-        updateFinancialSummary();
-    } else {
-        loginForm.style.display = "block";
-        productSection.style.display = "none";
-    }
-});
 
 
