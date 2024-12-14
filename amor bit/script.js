@@ -31,8 +31,10 @@ const totalProfitDisplay = document.getElementById("totalProfit");
 
 // Functions
 async function updateFinancialSummary() {
+
     totalSpentDisplay.textContent = `$${totalSpent.toFixed(2)}`;
     totalProfitDisplay.textContent = `$${totalProfit.toFixed(2)}`;
+
 }
 
 async function renderProducts() {
@@ -40,6 +42,7 @@ async function renderProducts() {
     const querySnapshot = await getDocs(collection(db, "products"));
     querySnapshot.forEach((doc) => {
         const product = doc.data();
+
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${product.name}</td>
@@ -73,8 +76,20 @@ async function renderSalesHistory() {
 }
 
 window.deleteProduct = async (id) => {
-    await deleteDoc(doc(db, "products", id));
-    await renderProducts();
+     // Obtén el producto antes de eliminarlo para saber cuánto gastaste en él
+     const productDoc = await getDoc(doc(db, "products", id));
+     if (productDoc.exists()) {
+         const productData = productDoc.data();
+         const productTotalSpent = productData.purchasePrice * productData.stock;
+ 
+         // Elimina el producto de Firebase
+         await deleteDoc(doc(db, "products", id));
+ 
+         // Actualiza el total gastado
+         totalSpent -= productTotalSpent;
+         await updateFinancialSummary(); // Actualiza el resumen financiero
+         await renderProducts(); // Vuelve a renderizar los productos
+     }
 };
 
 window.sellProduct = async (id, stock, salePrice, purchasePrice) => {
@@ -123,6 +138,16 @@ loginForm.addEventListener("submit", (e) => {
         });
 });
 
+async function calculateTotalSpent() {
+    totalSpent = 0; // Reinicia el total gastado
+    const querySnapshot = await getDocs(collection(db, "products"));
+    querySnapshot.forEach((doc) => {
+        const product = doc.data();
+        totalSpent += product.purchasePrice * product.stock; // Calcula el total gastado
+    });
+    await updateFinancialSummary(); // Actualiza el resumen financiero
+}
+
 // Cargar datos iniciales al iniciar sesión
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -131,6 +156,7 @@ onAuthStateChanged(auth, (user) => {
         renderProducts();
         renderSalesHistory();
         loadInitialBalance(); // Cargar el balance inicial
+        calculateTotalSpent(); // Cargar y calcular el total gastado
         updateFinancialSummary();
     } else {
         loginForm.style.display = "block";
@@ -155,10 +181,13 @@ productForm.addEventListener("submit", async (e) => {
     const salePrice = parseFloat(document.getElementById("productSalePrice").value);
     const stock = parseInt(document.getElementById("productStock").value);
 
+    // Calcula el total gastado por el nuevo producto
+    const productTotalSpent = purchasePrice * stock;
+
     const product = { name, photo, purchasePrice, salePrice, stock };
 
     await addDoc(collection(db, "products"), product);
-    totalSpent += purchasePrice * stock;
+    totalSpent += productTotalSpent;
     await updateFinancialSummary();
     await renderProducts();
     productForm.reset();
