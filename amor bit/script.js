@@ -199,7 +199,17 @@ productForm.addEventListener("submit", async (e) => {
     const product = { name, photo, purchasePrice, salePrice, stock };
 
     await addDoc(collection(db, "products"), product);
+
+    // Actualiza el total gastado
     totalSpent += productTotalSpent;
+
+    // Actualiza el balance total disponible
+    initialBalance -= productTotalSpent;
+
+    // Actualiza el balance en Firebase
+    const balanceDocRef = doc(db, "financialSummary", "initialBalance");
+    await setDoc(balanceDocRef, { initialBalance });
+
     await updateFinancialSummary();
     await renderProducts();
     productForm.reset();
