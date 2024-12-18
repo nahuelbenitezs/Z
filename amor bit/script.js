@@ -35,6 +35,7 @@ async function updateFinancialSummary() {
     totalSpentDisplay.textContent = `$${totalSpent.toFixed(2)}`;
     totalProfitDisplay.textContent = `$${totalProfit.toFixed(2)}`;
     totalBalanceDisplay.textContent = `$${initialBalance.toFixed(2)}`;
+    
 
 }
 
@@ -258,5 +259,6 @@ async function loadInitialBalance() {
         await updateTotalBalance();
     }
 }
+
 
 
