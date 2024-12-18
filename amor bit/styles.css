@@ -1,10 +1,12 @@
 body {
     background-color: #f8f9fa;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    height: 100vh;
+    height: auto;
     margin: 0;
+    padding: 1rem;
 }
 
 .login-card {
@@ -14,6 +16,7 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     max-width: 400px;
     width: 100%;
+    margin-bottom: 2rem;
 }
 
 .login-card h2 {
@@ -26,13 +29,66 @@ body {
     background-color: #6a1b9a;
     color: white;
     border: none;
+    font-size: 1rem;
+    padding: 0.75rem;
 }
 
 .btn-custom:hover {
     background-color: #4a0072;
 }
 
-.card:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease-in-out;
+.card {
+    margin-bottom: 1rem;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table {
+    font-size: 0.9rem;
+}
+
+.form-label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+#initialBalance {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .login-card {
+        max-width: 100%;
+    }
+
+    .btn-custom {
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+
+    .card {
+        margin-bottom: 1rem;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    #initialBalance {
+        width: 100%;
+        max-width: 100%;
+    }
 }

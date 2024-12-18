@@ -14,7 +14,7 @@
     <div class="container mt-5">
         <!-- Login Form -->
         <div class="login-card">
-            <h2>Iniciar Sesión</h2>
+            <h2 class="text-center">Iniciar Sesión</h2>
             <form id="loginForm">
                 <div class="mb-3">
                     <label for="email" class="form-label">Correo Electrónico</label>
@@ -30,37 +30,35 @@
 
         <!-- Product Management Section -->
         <div id="productSection" style="display: none;">
-
             <!-- Resumen Financiero -->
             <div class="mb-3">
                 <label for="initialBalance" class="form-label">Dinero Total Inicial</label>
-                <input type="number" step="0.01" class="form-control" id="initialBalance"
-                    placeholder="Ingresa el monto inicial">
+                <input type="number" step="0.01" class="form-control" id="initialBalance" placeholder="Ingresa el monto inicial">
                 <button id="setInitialBalance" class="btn btn-secondary mt-2">Guardar Monto Inicial</button>
             </div>
 
             <div class="row">
-                <div class="col-sm-4 mb-3">
+                <div class="col-md-4 mb-3">
                     <div class="card text-white bg-primary">
                         <div class="card-body">
-                            <h5 class="card-title">Total Gastado</h5>
-                            <p class="card-text" id="totalSpent">$0.00</p>
+                            <h5 class="card-title text-center">Total Gastado</h5>
+                            <p class="card-text text-center" id="totalSpent">$0.00</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 mb-3">
+                <div class="col-md-4 mb-3">
                     <div class="card text-white bg-success">
                         <div class="card-body">
-                            <h5 class="card-title">Ganancia Total</h5>
-                            <p class="card-text" id="totalProfit">$0.00</p>
+                            <h5 class="card-title text-center">Ganancia Total</h5>
+                            <p class="card-text text-center" id="totalProfit">$0.00</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 mb-3">
+                <div class="col-md-4 mb-3">
                     <div class="card text-white bg-warning">
                         <div class="card-body">
-                            <h5 class="card-title">Dinero Total Disponible</h5>
-                            <p class="card-text" id="totalBalance">$0.00</p>
+                            <h5 class="card-title text-center">Dinero Total Disponible</h5>
+                            <p class="card-text text-center" id="totalBalance">$0.00</p>
                         </div>
                     </div>
                 </div>
@@ -93,32 +91,36 @@
             </form>
 
             <h3>Lista de Productos</h3>
-            <table class="table table-responsive">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Foto</th>
-                        <th>Precio de Compra</th>
-                        <th>Precio de Venta</th>
-                        <th>Stock</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="productTableBody"></tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Foto</th>
+                            <th>Precio de Compra</th>
+                            <th>Precio de Venta</th>
+                            <th>Stock</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productTableBody"></tbody>
+                </table>
+            </div>
 
             <h3>Historial de Ventas</h3>
-            <table class="table table-responsive">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Fecha</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody id="salesHistoryBody"></tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="salesHistoryBody"></tbody>
+                </table>
+            </div>
 
             <button id="logoutButton" class="btn btn-danger">Cerrar Sesión</button>
         </div>
@@ -129,9 +131,6 @@
     <script type="module" src="./financialSummary.js"></script>
     <script type="module" src="./products.js"></script>
     <script type="module" src="./sales.js"></script>
-
-
-
 </body>
 
 </html>
