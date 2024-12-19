@@ -1,48 +1,50 @@
 body {
-    background-color: #f8f9fa;
+    background: linear-gradient(to bottom, #ffe7ba, #fff6e0);
+    font-family: 'Arial', sans-serif;
     margin: 0;
-    font-family: Arial, sans-serif;
+    padding: 0;
+    transition: opacity 1s ease-in-out;
 }
 
-.navbar {
-    margin-bottom: 20px;
+body.fade-out {
+    opacity: 0;
 }
 
-.card {
-    margin: 15px 0;
-}
-
-.card-body {
-    text-align: center;
-}
-
-.table-responsive {
-    margin-top: 20px;
-}
-
-.table {
-    font-size: 0.9rem;
-    margin-bottom: 20px;
+.login-container {
+    background: url('fondo.webp') no-repeat center center fixed;
+    background-size: cover;
 }
 
 .login-card {
-    background-color: white;
-    border-radius: 15px;
+    background: #f4f6ee;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     padding: 2rem;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     max-width: 400px;
-    margin: auto;
-    margin-top: 50px;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+}
+
+.maneki-logo {
+    width: 100px;
+    height: auto;
 }
 
 .btn-custom {
-    background-color: #6a1b9a;
+    background-color: #ff7043;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 0.8rem;
     font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
 }
 
 .btn-custom:hover {
-    background-color: #4a0072;
+    background-color: #d65124;
+    transform: scale(1.05);
 }
