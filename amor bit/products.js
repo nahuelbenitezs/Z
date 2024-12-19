@@ -6,9 +6,6 @@ import { renderSalesHistory } from "./sales.js";
 const productForm = document.getElementById("productForm");
 const productTableBody = document.getElementById("productTableBody");
 
-let totalProfit = 0; // Declarar como mutable
-let totalSpent = 0; // Declarar como mutable
-
 async function renderProducts() {
     productTableBody.innerHTML = "";
     const querySnapshot = await getDocs(collection(db, "products"));
@@ -33,20 +30,9 @@ async function renderProducts() {
 
 async function deleteProduct(id) {
     try {
-        const productDoc = await getDoc(doc(db, "products", id));
-        if (productDoc.exists()) {
-            const productData = productDoc.data();
-            const productTotalSpent = productData.purchasePrice * productData.stock;
-
-            await deleteDoc(doc(db, "products", id));
-            totalSpent -= productTotalSpent; // Actualiza la variable local
-            await updateFinancialSummary();
-
-            const productRow = document.querySelector(`tr[data-id="${id}"]`);
-            if (productRow) {
-                productRow.remove();
-            }
-        }
+        await deleteDoc(doc(db, "products", id));
+        renderProducts();
+        await updateFinancialSummary();
     } catch (error) {
         console.error("Error al eliminar el producto:", error);
         alert("Hubo un error al intentar eliminar el producto.");
@@ -63,7 +49,6 @@ async function sellProduct(id, stock, salePrice, purchasePrice) {
     try {
         const newStock = stock - quantity;
         const saleTotal = salePrice * quantity;
-        const purchaseTotal = purchasePrice * quantity;
 
         await updateDoc(doc(db, "products", id), { stock: newStock });
 
@@ -74,12 +59,9 @@ async function sellProduct(id, stock, salePrice, purchasePrice) {
             total: saleTotal,
         });
 
-        totalProfit += saleTotal - purchaseTotal; // Actualiza la ganancia localmente
-        totalSpent += purchaseTotal; // Incrementa los gastos locales
+        renderProducts();
+        renderSalesHistory();
         await updateFinancialSummary();
-
-        await renderProducts();
-        await renderSalesHistory();
     } catch (error) {
         console.error("Error al vender el producto:", error);
         alert("Hubo un error al intentar realizar la venta.");
@@ -93,17 +75,20 @@ async function modifyStock(id, currentStock) {
         return;
     }
 
-    const newStock = currentStock + additionalStock;
-
     try {
+        const newStock = currentStock + additionalStock;
         await updateDoc(doc(db, "products", id), { stock: newStock });
-        alert("Stock actualizado correctamente.");
-        await renderProducts();
+        renderProducts();
     } catch (error) {
         console.error("Error al modificar el stock:", error);
         alert("Hubo un error al intentar modificar el stock.");
     }
 }
+
+// Hacer las funciones globales
+window.deleteProduct = deleteProduct;
+window.sellProduct = sellProduct;
+window.modifyStock = modifyStock;
 
 productForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -116,17 +101,12 @@ productForm.addEventListener("submit", async (e) => {
 
     try {
         await addDoc(collection(db, "products"), { name, photo, purchasePrice, salePrice, stock });
-        await renderProducts();
+        renderProducts();
         productForm.reset();
     } catch (error) {
         console.error("Error al agregar el producto:", error);
         alert("Hubo un error al intentar agregar el producto.");
     }
 });
-
-// Hacer las funciones accesibles globalmente
-window.deleteProduct = deleteProduct;
-window.sellProduct = sellProduct;
-window.modifyStock = modifyStock;
 
 export { renderProducts };

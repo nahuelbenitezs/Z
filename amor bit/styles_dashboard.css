@@ -16,15 +16,24 @@ body {
     text-align: center;
 }
 
-.table-responsive {
+.dashboard-section {
     margin-top: 20px;
 }
 
 .table {
+    margin-top: 20px;
     font-size: 0.9rem;
-    margin-bottom: 20px;
 }
 
+.btn-primary {
+    margin-top: 10px;
+}
+
+.table-responsive {
+    margin-top: 20px;
+}
+
+/* Estilos para la página de login */
 .login-card {
     background-color: white;
     border-radius: 15px;
