@@ -7,76 +7,74 @@
     <title>Dashboard - Lu Gestión</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles_dashboard.css">
+    <link rel="icon" type="image/webp" href="logo.webp">
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="#">Lu Gestión</a>
-        </div>
-    </nav>
-
-    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menú</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#financialSummary" data-section="financialSummary">Resumen Financiero</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#products" data-section="products">Productos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#sales" data-section="sales">Historial de Ventas</a>
-                </li>
-                <li class="nav-item">
-                    <button id="logoutButton" class="btn btn-danger nav-link text-white">Cerrar Sesión</button>
-                </li>
-            </ul>
-        </div>
-    </div>
-
     <div class="container-fluid">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="logo.webp" alt="Logo Lu Gestión" class="me-2" style="width: 40px;">
+                    <span class="fw-bold">Lu Gestión</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active fw-semibold" href="#financialSummary" data-section="financialSummary">Resumen Financiero</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" href="#products" data-section="products">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" href="#sales" data-section="sales">Ventas</a>
+                        </li>
+                        <li class="nav-item">
+                            <button id="logoutButton" class="btn btn-danger">Salir</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
         <!-- Secciones -->
-        <div id="financialSummary" class="dashboard-section">
-            <h2>Resumen Financiero</h2>
+        <div id="financialSummary" class="dashboard-section p-4">
+            <h2 class="text-center mb-4">Resumen Financiero</h2>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="card bg-primary text-white">
+                    <div class="card text-center shadow-sm">
                         <div class="card-body">
-                            <h5>Total Gastado</h5>
-                            <p id="totalSpent">$0.00</p>
+                            <h5 class="text-muted">Total Gastado</h5>
+                            <p id="totalSpent" class="fs-3 text-danger">$0.00</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card bg-success text-white">
+                    <div class="card text-center shadow-sm">
                         <div class="card-body">
-                            <h5>Ganancia Total</h5>
-                            <p id="totalProfit">$0.00</p>
+                            <h5 class="text-muted">Ganancia Total</h5>
+                            <p id="totalProfit" class="fs-3 text-success">$0.00</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card bg-warning text-dark">
+                    <div class="card text-center shadow-sm">
                         <div class="card-body">
-                            <h5>Dinero Total Disponible</h5>
-                            <p id="totalBalance">$0.00</p>
+                            <h5 class="text-muted">Dinero Total</h5>
+                            <p id="totalBalance" class="fs-3 text-primary">$0.00</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="products" class="dashboard-section d-none">
-            <h2>Gestión de Productos</h2>
-            <form id="productForm">
+        <div id="products" class="dashboard-section p-4 d-none">
+            <h2 class="text-center mb-4">Gestión de Productos</h2>
+            <form id="productForm" class="mb-4 shadow-sm p-4 rounded bg-white">
                 <div class="mb-3">
                     <label for="productName" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="productName" required>
@@ -97,10 +95,10 @@
                     <label for="productStock" class="form-label">Stock</label>
                     <input type="number" class="form-control" id="productStock" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                <button type="submit" class="btn btn-primary w-100">Agregar Producto</button>
             </form>
 
-            <h3>Lista de Productos</h3>
+            <h3 class="text-center">Lista de Productos</h3>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -113,13 +111,15 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="productTableBody"></tbody>
+                    <tbody id="productTableBody">
+                        <!-- Los productos se renderizarán aquí -->
+                    </tbody>
                 </table>
             </div>
         </div>
 
-        <div id="sales" class="dashboard-section d-none">
-            <h2>Historial de Ventas</h2>
+        <div id="sales" class="dashboard-section p-4 d-none">
+            <h2 class="text-center mb-4">Historial de Ventas</h2>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -130,16 +130,18 @@
                             <th>Total</th>
                         </tr>
                     </thead>
-                    <tbody id="salesHistoryBody"></tbody>
+                    <tbody id="salesHistoryBody">
+                        <!-- Las ventas se renderizarán aquí -->
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 
     <script type="module" src="firebaseConfig.js"></script>
-    <script type="module" src="auth.js"></script>
+    <script type="module" src="products.js"></script>
+    <script type="module" src="sales.js"></script>
     <script type="module" src="dashboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

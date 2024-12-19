@@ -8,6 +8,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
     const sections = document.querySelectorAll(".dashboard-section");
     const logoutButton = document.getElementById("logoutButton");
+    const navbarToggler = document.querySelector(".navbar-toggler");
+    const navbarCollapse = document.querySelector(".navbar-collapse");
+
+    // Agregar evento al toggler para abrir y cerrar el menú
+    if (navbarToggler) {
+        navbarToggler.addEventListener("click", () => {
+            navbarCollapse.classList.toggle("show");
+        });
+    }
 
     // Manejo de navegación entre secciones
     navLinks.forEach(link => {
@@ -23,10 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // Ocultar todas las secciones
-            sections.forEach(section => section.classList.add("d-none"));
+            sections.forEach(section => {
+                section.classList.remove("active");
+                section.style.display = "none";
+            });
 
             // Mostrar la sección activa
-            activeSection.classList.remove("d-none");
+            activeSection.classList.add("active");
+            activeSection.style.display = "block";
 
             // Cambiar el estado activo en la navegación
             navLinks.forEach(nav => nav.classList.remove("active"));
@@ -46,6 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     break;
                 default:
                     console.warn(`No se han definido acciones para la sección: ${sectionId}`);
+            }
+
+            // Cerrar menú en móviles
+            if (window.innerWidth < 992 && navbarCollapse.classList.contains("show")) {
+                navbarCollapse.classList.remove("show");
             }
         });
     });
