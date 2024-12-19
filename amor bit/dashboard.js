@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoutButton = document.getElementById("logoutButton");
     const navbarToggler = document.querySelector(".navbar-toggler");
     const navbarCollapse = document.querySelector(".navbar-collapse");
+    const welcomeSection = document.getElementById("welcomeSection");
 
     // Agregar evento al toggler para abrir y cerrar el menú
     if (navbarToggler) {
@@ -36,6 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 section.classList.remove("active");
                 section.style.display = "none";
             });
+
+            // Ocultar la sección de bienvenida
+            if (welcomeSection) {
+                welcomeSection.style.display = "none";
+            }
 
             // Mostrar la sección activa
             activeSection.classList.add("active");
@@ -67,6 +73,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
+    // Mostrar la sección de bienvenida al cargar si no hay ninguna sección activa
+    const currentPath = window.location.pathname;
+    if (currentPath.includes("dashboard.html")) {
+        sections.forEach(section => {
+            section.style.display = "none";
+        });
+        if (welcomeSection) {
+            welcomeSection.style.display = "block";
+            welcomeSection.style.visibility = "visible";
+            welcomeSection.style.opacity = "1";
+        }
+    }
 
     // Cargar Resumen Financiero por defecto al iniciar
     loadInitialBalance();

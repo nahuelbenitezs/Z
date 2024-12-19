@@ -104,3 +104,32 @@ body {
         margin-bottom: 10px;
     }
 }
+
+.rotating-logo {
+    animation: rotate infinite 5s linear;
+}
+
+.wave-animation {
+    font-size: 2rem;
+    font-weight: bold;
+    animation: wave 2s infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
