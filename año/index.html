@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi todo mi año nuevo</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        #message {
+            display: none;
+            position: absolute;
+            text-align: center;
+            font-size: 2em;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        #letter {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: black;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            max-width: 800px;
+            max-height: 90vh;
+            text-align: left;
+            font-size: 1.2em;
+            animation: fadeIn 3s ease-in-out;
+            overflow-y: auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="fireworks"></canvas>
+    <div id="message">
+        <h1>¡Feliz Año Nuevo, mi amor!</h1>
+        <p>Que este año esté lleno de amor, risas y sueños cumplidos. Te amo con todo mi corazón.</p>
+    </div>
+    <div id="letter">
+        <h2>Mi todo:</h2>
+        <p>
+            Hoy, al cerrar un año más de nuestras vidas y abrir las puertas a uno nuevo, no puedo evitar detenerme un
+            momento para reflexionar sobre todo lo que hemos compartido. Contigo, cada día se siente como un regalo, y
+            el simple hecho de tenerte a mi lado transforma cualquier instante en algo especial.
+        </p>
+        <p>
+            Quiero empezar este nuevo año expresándote cuánto significas para mí. Tú no eres solo mi pareja, eres mi
+            confidente, mi compañera, mi paz y mi alegría. En tu mirada encuentro la fuerza para enfrentar cualquier
+            reto, y en tu sonrisa, la luz que ilumina incluso los días más grises.
+        </p>
+        <p>
+            Este año que termina ha sido un viaje lleno de aprendizajes, de momentos dulces y otros no tan fáciles, pero
+            en cada uno de ellos, tu amor ha sido mi refugio. Cada vez que me sentí perdido, fue tu apoyo el que me
+            guio. Cada vez que logré algo, tu alegría lo hizo aún más especial. Y en los días comunes, esos en los que
+            no pasa nada extraordinario, tu simple presencia los convirtió en recuerdos que atesoro.
+        </p>
+        <p>
+            Amor, quiero que sepas que este próximo año no solo es una oportunidad para trazarnos metas o soñar en
+            grande, sino también para seguir cultivando lo que tenemos. Deseo que sigamos creciendo juntos, descubriendo
+            nuevas razones para amarnos, para reírnos, para abrazarnos más fuerte y para soñar más alto.
+        </p>
+        <p>
+            Mis deseos para este Año Nuevo son simples, pero llenos de intención: quiero que seas inmensamente feliz,
+            que alcances tus metas y que veas en el espejo a la mujer maravillosa que veo yo. Quiero ser tu apoyo en
+            cada paso, tu cómplice en cada aventura, y tu descanso en los momentos difíciles.
+        </p>
+        <p>
+            Además, quiero agradecerte por ser quien eres. Por tus detalles, por tus risas espontáneas, por tu capacidad
+            de hacer que mi mundo sea un lugar mejor.
+        </p>
+        <p>
+            Este Año Nuevo no solo brinda nuevas oportunidades para el mundo que nos rodea, sino también para nuestro
+            mundo, el que hemos construido tú y yo. Quiero que sigamos escribiendo nuestra historia, una página a la
+            vez, con la certeza de que juntos podemos con todo.
+        </p>
+        <p>
+            Así que aquí estoy, mirándote con el corazón lleno de gratitud y esperanza, deseándote un feliz año. Que
+            este 2025 llegue cargado de amor, salud, risas y sueños cumplidos. Que cada día sea una oportunidad para
+            aprender, para amar y para ser felices juntos.
+        </p>
+        <p>
+            Gracias por ser mi mayor bendición. Feliz Año Nuevo, mi todo. Prometo que en este año, como en todos los que
+            vengan, seguiré eligiéndote, amándote y cuidándote con todo lo que soy. Porque tú eres mi hogar, mi sueño
+            cumplido, mi todo.
+        </p>
+        <p>Te amo más de lo que las palabras pueden expresar, y no veo la hora de comenzar este nuevo capítulo contigo.
+        </p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('fireworks');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.radius = Math.random() * 3 + 1;
+                this.color = color;
+                this.speedX = Math.random() * 5 - 2.5;
+                this.speedY = Math.random() * 5 - 2.5;
+                this.opacity = 1;
+                this.fade = Math.random() * 0.03 + 0.01;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.opacity -= this.fade;
+            }
+
+            draw() {
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function createFirework() {
+            const colors = ['#ff4d4d', '#ffdb4d', '#4dff88', '#4dcaff', '#b84dff'];
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height / 2;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            for (let i = 0; i < 100; i++) {
+                particles.push(new Particle(x, y, color));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((particle, index) => {
+                if (particle.opacity <= 0) {
+                    particles.splice(index, 1);
+                } else {
+                    particle.update();
+                    particle.draw();
+                }
+            });
+
+            if (Math.random() < 0.05) {
+                createFirework();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        setTimeout(() => {
+            document.body.style.overflow = 'auto';
+            document.getElementById('message').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('letter').style.display = 'block';
+            }, 5000); // Mostrar carta después de 5 segundos del mensaje
+        }, 5000); // Mostrar mensaje después de 5 segundos
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+
+</html>
