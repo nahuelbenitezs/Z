@@ -1,0 +1,478 @@
+/* Variables CSS para colores y fuentes */
+:root {
+    --primary-color: #6a0572; /* Un púrpura profundo */
+    --secondary-color: #a72d8a; /* Un púrpura más suave */
+    --accent-color: #d8b44c; /* Dorado para destacar */
+    --text-dark: #333;
+    --text-light: #f5f5f5;
+    --background-light: #fefefe;
+    --background-dark: #2c003e;
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+/* Reset Básico y Estilos Generales */
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden; /* Evita scroll horizontal */
+    background-color: var(--background-light);
+}
+
+.full-height {
+    min-height: 100vh; /* Ocupa la altura completa de la ventana */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box; /* Incluye padding en el tamaño */
+    position: relative; /* Para posicionar elementos internos */
+    overflow: hidden; /* Para las animaciones de fondo */
+}
+
+.hidden {
+    display: none; /* Se oculta inicialmente y se mostrará con JS */
+}
+
+/* Animaciones globales (para reveal on scroll con AOS) */
+[data-aos] {
+    opacity: 0;
+    transition-property: opacity, transform;
+    transition-duration: 1s;
+    transition-timing-function: ease-out;
+}
+
+[data-aos="fade-in-up"] {
+    transform: translateY(20px);
+}
+
+[data-aos].aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.3s; }
+.delay-2 { transition-delay: 0.6s; }
+.delay-3 { transition-delay: 0.9s; }
+.delay-4 { transition-delay: 1.2s; }
+.delay-5 { transition-delay: 1.5s; }
+.delay-6 { transition-delay: 1.8s; }
+
+
+/* --- Sección de Página de Inicio --- */
+#landing-page {
+    position: relative;
+    color: var(--text-light);
+    text-align: center;
+}
+
+#landing-page .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('your-image.jpg'); /* Reemplaza con tu imagen */
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.7); /* Oscurece la imagen para que el texto resalte */
+    z-index: -1;
+    /* Efecto de paralaje (se hará con JS si no usas una librería) */
+}
+
+#landing-page .content {
+    z-index: 1;
+}
+
+#landing-page h1 {
+    font-family: var(--font-heading);
+    font-size: 4em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+#landing-page p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+#discover-button {
+    background-color: var(--accent-color);
+    color: var(--text-dark);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#discover-button:hover {
+    background-color: #f0c960; /* Un dorado más claro */
+    transform: translateY(-3px);
+}
+
+/* Audio Controls */
+.audio-controls {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+#play-pause-button {
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+#play-pause-button:hover {
+    background: rgba(0,0,0,0.7);
+}
+
+
+/* --- Sección de la Carta --- */
+#letter-section {
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    text-align: center;
+    padding: 80px 20px; /* Más padding para que respire */
+}
+
+.letter-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 40px 60px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.letter-title {
+    font-family: var(--font-heading);
+    font-size: 3em;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.letter-paragraph {
+    font-family: var(--font-body);
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    line-height: 1.8;
+    color: var(--text-dark);
+}
+
+.highlight {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* --- Sección de Promesas y Sueños Compartidos --- */
+#promises-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    text-align: center;
+}
+
+.promises-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 3em;
+    margin-bottom: 60px;
+    color: var(--text-light);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.promises-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.promise-item {
+    background-color: rgba(255, 255, 255, 0.15); /* Transparencia para ver el fondo */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.promise-item:hover {
+    transform: translateY(-10px);
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.promise-item i {
+    font-size: 3em;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.promise-item h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.future-vision {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.future-vision img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.future-vision p {
+    font-size: 1.2em;
+    font-style: italic;
+    color: var(--text-light);
+}
+
+/* --- Sección de Confianza y Libertad --- */
+#freedom-section {
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    text-align: center;
+    min-height: 80vh; /* Ajusta la altura si la animación es muy grande */
+}
+
+.freedom-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#freedom-section .section-title {
+    color: var(--primary-color);
+    text-shadow: none;
+}
+
+#freedom-section p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+}
+
+.animation-container {
+    width: 100%;
+    max-width: 500px; /* Ajusta el tamaño de la animación */
+    margin: 0 auto;
+    /* Estilos para el GIF o SVG animado */
+}
+
+.freedom-animation-gif {
+    width: 100%;
+    height: auto;
+    display: block; /* Elimina espacio extra debajo del gif */
+}
+
+/* Si usas SVG animado en el futuro, los estilos irían aquí */
+#freedom-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* --- Sección de Sorpresa Final --- */
+#surprise-section {
+    background: var(--background-dark);
+    color: var(--text-light);
+    text-align: center;
+}
+
+.surprise-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+#surprise-section .section-title {
+    color: var(--accent-color);
+}
+
+#reveal-surprise-button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+#reveal-surprise-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+#surprise-reveal {
+    margin-top: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.surprise-video {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.surprise-image {
+    max-width: 80%; /* Ajusta si es un vale regalo */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.surprise-text {
+    font-family: var(--font-heading);
+    font-size: 1.8em;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.highlight-coords {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+
+/* --- Mensaje Final --- */
+#final-message-section {
+    background-color: var(--background-light);
+    color: var(--primary-color);
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.final-text {
+    font-family: var(--font-heading);
+    font-size: 2.2em;
+    font-style: italic;
+    line-height: 1.4;
+    max-width: 700px;
+    margin: 0 auto;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Media Queries para Responsive Design */
+@media (max-width: 768px) {
+    #landing-page h1 {
+        font-size: 2.8em;
+    }
+
+    #landing-page p {
+        font-size: 1.2em;
+    }
+
+    .letter-container {
+        padding: 30px;
+    }
+
+    .letter-title {
+        font-size: 2.2em;
+    }
+
+    .letter-paragraph {
+        font-size: 1em;
+    }
+
+    .section-title {
+        font-size: 2.5em;
+    }
+
+    .promises-grid {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    }
+
+    .final-text {
+        font-size: 1.6em;
+    }
+}
+
+@media (max-width: 480px) {
+    #landing-page h1 {
+        font-size: 2em;
+    }
+
+    #landing-page p {
+        font-size: 1em;
+    }
+
+    #discover-button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+
+    .letter-container {
+        padding: 20px;
+    }
+
+    .letter-title {
+        font-size: 1.8em;
+    }
+
+    .letter-paragraph {
+        font-size: 0.9em;
+    }
+
+    .section-title {
+        font-size: 2em;
+    }
+
+    .promise-item h3 {
+        font-size: 1.2em;
+    }
+
+    .surprise-text {
+        font-size: 1.4em;
+    }
+
+    .final-text {
+        font-size: 1.4em;
+    }
+}
+
+/* Animación de partículas de fondo (OPCIONAL y más complejo) */
+/* Si quieres esto, necesitas un script JS para generarlas y estilos adicionales aquí.
+   Busca "HTML CSS JS animated background particles" para ejemplos.
+   Es mejor añadirlo al `body` o a una sección específica como un div con `position: fixed`.
+*/
+
+/* Efecto de cursor de corazones (OPCIONAL) */
+/* Esto requiere un script JS para detectar el movimiento del mouse y crear elementos.
+   Busca "HTML CSS JS heart cursor" para ejemplos. */
