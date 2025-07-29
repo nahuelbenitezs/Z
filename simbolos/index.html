@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipbook Digital Responsivo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .flipbook-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            perspective: 1500px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .book {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .page {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            background: white;
+            border: 1px solid #ddd;
+            transform-origin: left center;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 1;
+        }
+
+        .page.left {
+            right: 50%;
+            transform-origin: right center;
+        }
+
+        .page.right {
+            left: 50%;
+        }
+
+        .page.flipped {
+            transform: rotateY(-180deg);
+            z-index: 0;
+        }
+
+        .page.left.flipped {
+            transform: rotateY(180deg);
+            z-index: 0;
+        }
+
+        .page.hidden {
+            display: none;
+        }
+
+        .page h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .page h2 {
+            font-size: 2em;
+            color: #444;
+            margin-bottom: 15px;
+        }
+
+        .page h3 {
+            font-size: 1.5em;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .page p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9em;
+            color: #999;
+        }
+
+        .page.left .page-number {
+            left: 20px;
+        }
+
+        .page.right .page-number {
+            right: 20px;
+        }
+
+        /* Estilos específicos para diferentes páginas */
+        .cover {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+        }
+
+        .cover h1 {
+            color: white;
+            font-size: 3em;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .back-cover {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+        }
+
+        .content-page:nth-child(even) {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+        }
+
+        .content-page:nth-child(even) h2,
+        .content-page:nth-child(even) h3,
+        .content-page:nth-child(even) p {
+            color: white;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .page-indicator {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 14px;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .flipbook-container {
+                height: 500px;
+                max-width: 90vw;
+            }
+
+            .page {
+                padding: 20px;
+            }
+
+            .page h1 {
+                font-size: 2em;
+            }
+
+            .page h2 {
+                font-size: 1.5em;
+            }
+
+            .page h3 {
+                font-size: 1.3em;
+            }
+
+            .page p {
+                font-size: 1em;
+            }
+
+            .cover h1 {
+                font-size: 2.2em;
+            }
+
+            .controls {
+                bottom: -50px;
+            }
+
+            .btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .flipbook-container {
+                height: 400px;
+            }
+
+            .page {
+                padding: 15px;
+            }
+
+            .page h1 {
+                font-size: 1.8em;
+            }
+
+            .page h2 {
+                font-size: 1.3em;
+            }
+
+            .page h3 {
+                font-size: 1.1em;
+            }
+
+            .page p {
+                font-size: 0.9em;
+            }
+
+            .cover h1 {
+                font-size: 2em;
+            }
+        }
+
+        /* Animaciones adicionales */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-content {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Efectos de hover para móviles */
+        @media (hover: hover) {
+            .page:hover {
+                box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            }
+        }
+
+        /* Indicador visual para páginas que se pueden voltear */
+        .page::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .page:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="flipbook-container">
+        <div class="page-indicator">
+            Página <span id="current-page">1</span> de <span id="total-pages">12</span>
+        </div>
+        
+        <div class="book" id="book">
+            <!-- Portada -->
+            <div class="page right cover" data-page="1">
+                <div class="page-content">
+                    <h1>✨ REVISTA DIGITAL ✨</h1>
+                    <h3>Una experiencia interactiva</h3>
+                    <p>Desliza o haz clic para explorar</p>
+                </div>
+                <div class="page-number">1</div>
+            </div>
+
+            <!-- Página 2 -->
+            <div class="page left content-page" data-page="2">
+                <div class="page-content">
+                    <h2>🌟 Bienvenido</h2>
+                    <p>Esta es una revista digital interactiva creada con HTML, CSS y JavaScript puro. Cada página contiene contenido único y está optimizada para dispositivos móviles.</p>
+                    <p>Navega usando los botones de control o simplemente haciendo clic en las páginas.</p>
+                </div>
+                <div class="page-number">2</div>
+            </div>
+
+            <!-- Página 3 -->
+            <div class="page right content-page" data-page="3">
+                <div class="page-content">
+                    <h2>🎨 Diseño Responsivo</h2>
+                    <p>El flipbook se adapta perfectamente a cualquier tamaño de pantalla, desde dispositivos móviles hasta pantallas de escritorio.</p>
+                    <p>Las animaciones están optimizadas para ofrecer una experiencia fluida en todos los dispositivos.</p>
+                </div>
+                <div class="page-number">3</div>
+            </div>
+
+            <!-- Página 4 -->
+            <div class="page left content-page" data-page="4">
+                <div class="page-content">
+                    <h2>⚡ Tecnología</h2>
+                    <p>Desarrollado con:</p>
+                    <h3>• HTML5 semántico</h3>
+                    <h3>• CSS3 con transformaciones 3D</h3>
+                    <h3>• JavaScript vanilla</h3>
+                    <p>Sin dependencias externas, completamente autónomo.</p>
+                </div>
+                <div class="page-number">4</div>
+            </div>
+
+            <!-- Página 5 -->
+            <div class="page right content-page" data-page="5">
+                <div class="page-content">
+                    <h2>📱 Móvil Primero</h2>
+                    <p>El diseño está pensado desde dispositivos móviles, con controles táctiles intuitivos y navegación optimizada.</p>
+                    <p>Funciona perfectamente en tablets, smartphones y navegadores de escritorio.</p>
+                </div>
+                <div class="page-number">5</div>
+            </div>
+
+            <!-- Página 6 -->
+            <div class="page left content-page" data-page="6">
+                <div class="page-content">
+                    <h2>🎯 Características</h2>
+                    <h3>✓ Animaciones suaves</h3>
+                    <h3>✓ Controles intuitivos</h3>
+                    <h3>✓ Diseño adaptativo</h3>
+                    <h3>✓ Efectos 3D realistas</h3>
+                    <h3>✓ Optimizado para rendimiento</h3>
+                </div>
+                <div class="page-number">6</div>
+            </div>
+
+            <!-- Página 7 -->
+            <div class="page right content-page" data-page="7">
+                <div class="page-content">
+                    <h2>🌈 Colores Vibrantes</h2>
+                    <p>Cada página utiliza gradientes modernos y colores que crean una experiencia visual atractiva.</p>
+                    <p>Los contrastes están optimizados para una lectura cómoda en cualquier dispositivo.</p>
+                </div>
+                <div class="page-number">7</div>
+            </div>
+
+            <!-- Página 8 -->
+            <div class="page left content-page" data-page="8">
+                <div class="page-content">
+                    <h2>🚀 Rendimiento</h2>
+                    <p>Las animaciones utilizan hardware acceleration para garantizar 60fps en la mayoría de dispositivos.</p>
+                    <p>El código está optimizado para cargar rápidamente y funcionar sin problemas.</p>
+                </div>
+                <div class="page-number">8</div>
+            </div>
+
+            <!-- Página 9 -->
+            <div class="page right content-page" data-page="9">
+                <div class="page-content">
+                    <h2>🎮 Interactividad</h2>
+                    <p>Los usuarios pueden navegar de múltiples formas:</p>
+                    <h3>• Clic en las páginas</h3>
+                    <h3>• Botones de navegación</h3>
+                    <h3>• Gestos táctiles (móvil)</h3>
+                    <h3>• Teclado (escritorio)</h3>
+                </div>
+                <div class="page-number">9</div>
+            </div>
+
+            <!-- Página 10 -->
+            <div class="page left content-page" data-page="10">
+                <div class="page-content">
+                    <h2>💡 Innovación</h2>
+                    <p>Este flipbook representa la convergencia entre diseño tradicional y tecnología web moderna.</p>
+                    <p>Una experiencia que combina nostalgia con innovación digital.</p>
+                </div>
+                <div class="page-number">10</div>
+            </div>
+
+            <!-- Página 11 -->
+            <div class="page right content-page" data-page="11">
+                <div class="page-content">
+                    <h2>🎨 Personalizable</h2>
+                    <p>El código está estructurado para facilitar la personalización de colores, contenido y animaciones.</p>
+                    <p>Puedes adaptar fácilmente el diseño a tus necesidades específicas.</p>
+                </div>
+                <div class="page-number">11</div>
+            </div>
+
+            <!-- Contraportada -->
+            <div class="page left back-cover" data-page="12">
+                <div class="page-content">
+                    <h2>🎉 ¡Gracias por leer!</h2>
+                    <p>Esperamos que hayas disfrutado de esta experiencia interactiva.</p>
+                    <h3>✨ Flipbook Digital ✨</h3>
+                    <p>Creado con amor y código</p>
+                </div>
+                <div class="page-number">12</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" id="prevBtn" onclick="previousPage()">⬅ Anterior</button>
+            <button class="btn" id="nextBtn" onclick="nextPage()">Siguiente ➡</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 12;
+        let isAnimating = false;
+
+        function updatePageIndicator() {
+            document.getElementById('current-page').textContent = currentPage;
+            document.getElementById('total-pages').textContent = totalPages;
+        }
+
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+        }
+
+        function showPages() {
+            const pages = document.querySelectorAll('.page');
+            
+            // Ocultar todas las páginas primero
+            pages.forEach(page => {
+                page.classList.add('hidden');
+                page.classList.remove('flipped');
+            });
+
+            // Lógica para mostrar páginas según posición actual
+            if (currentPage === 1) {
+                // Primera página: solo mostrar portada a la derecha
+                const page1 = document.querySelector('[data-page="1"]');
+                if (page1) {
+                    page1.classList.remove('hidden');
+                }
+            } else if (currentPage % 2 === 0) {
+                // Página par: mostrar página actual a la izquierda y siguiente a la derecha
+                const currentPageEl = document.querySelector(`[data-page="${currentPage}"]`);
+                const nextPageEl = document.querySelector(`[data-page="${currentPage + 1}"]`);
+                
+                if (currentPageEl) {
+                    currentPageEl.classList.remove('hidden');
+                }
+                if (nextPageEl && currentPage < totalPages) {
+                    nextPageEl.classList.remove('hidden');
+                }
+            } else {
+                // Página impar: mostrar página anterior a la izquierda y actual a la derecha
+                const prevPageEl = document.querySelector(`[data-page="${currentPage - 1}"]`);
+                const currentPageEl = document.querySelector(`[data-page="${currentPage}"]`);
+                
+                if (prevPageEl && currentPage > 1) {
+                    prevPageEl.classList.remove('hidden');
+                }
+                if (currentPageEl) {
+                    currentPageEl.classList.remove('hidden');
+                }
+            }
+        }
+
+        function flipToPage(pageNumber) {
+            if (isAnimating || pageNumber < 1 || pageNumber > totalPages || pageNumber === currentPage) return;
+            
+            isAnimating = true;
+            
+            currentPage = pageNumber;
+            showPages();
+            updatePageIndicator();
+            updateButtons();
+
+            // Permitir nueva animación después de que termine la actual
+            setTimeout(() => {
+                isAnimating = false;
+            }, 800);
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                flipToPage(currentPage + 1);
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                flipToPage(currentPage - 1);
+            }
+        }
+
+        // Event listeners para clics en las páginas
+        document.addEventListener('DOMContentLoaded', function() {
+            const pages = document.querySelectorAll('.page');
+            
+            pages.forEach(page => {
+                page.addEventListener('click', function() {
+                    const pageNum = parseInt(this.getAttribute('data-page'));
+                    
+                    // Determinar si ir adelante o atrás
+                    if (pageNum > currentPage) {
+                        nextPage();
+                    } else if (pageNum < currentPage) {
+                        previousPage();
+                    }
+                });
+            });
+
+            // Soporte para teclado
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    e.preventDefault();
+                    nextPage();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    previousPage();
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    flipToPage(1);
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    flipToPage(totalPages);
+                }
+            });
+
+            // Soporte para gestos táctiles en móviles
+            let startX = 0;
+            let startY = 0;
+            
+            document.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            });
+
+            document.addEventListener('touchend', function(e) {
+                if (!startX || !startY) return;
+
+                const endX = e.changedTouches[0].clientX;
+                const endY = e.changedTouches[0].clientY;
+                
+                const deltaX = startX - endX;
+                const deltaY = startY - endY;
+
+                // Detectar swipe horizontal
+                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                    if (deltaX > 0) {
+                        // Swipe izquierda (siguiente página)
+                        nextPage();
+                    } else {
+                        // Swipe derecha (página anterior)
+                        previousPage();
+                    }
+                }
+
+                startX = 0;
+                startY = 0;
+            });
+
+            // Inicializar
+            showPages();
+            updatePageIndicator();
+            updateButtons();
+        });
+
+        // Prevenir zoom en doble tap en móviles
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
