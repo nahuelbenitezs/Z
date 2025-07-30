@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,10 +26,10 @@
         .flipbook-container {
             position: relative;
             width: 100%;
-            max-width: 800px;
-            height: 600px;
+            max-width: 900px;
+            height: 700px;
             perspective: 1500px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             border-radius: 10px;
             overflow: hidden;
         }
@@ -51,13 +52,14 @@
             backface-visibility: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            padding: 40px;
+            padding: 25px;
             text-align: center;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             z-index: 1;
+            overflow-y: auto;
         }
 
         .page.left {
@@ -87,7 +89,7 @@
             font-size: 2.5em;
             color: #333;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .page h2 {
@@ -126,29 +128,127 @@
 
         /* Estilos específicos para diferentes páginas */
         .cover {
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-            color: white;
+            background: #f8f8f8;
+            color: #333;
+            padding: 40px;
+            text-align: left;
+            justify-content: flex-start;
+            align-items: flex-start;
         }
 
         .cover h1 {
-            color: white;
-            font-size: 3em;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            color: #333;
+            font-size: 2.2em;
+            text-shadow: none;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-align: left;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+        }
+
+        .cover h2 {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            font-weight: normal;
+            text-align: left;
+            letter-spacing: 1px;
+        }
+
+        .cover .image-container {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            margin: 40px 0;
+            border: 2px solid #333;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .cover .carreta-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cover .credits {
+            margin-top: 60px;
+            font-size: 1em;
+            color: #333;
+            text-align: left;
+        }
+
+        .cover .credits div {
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
 
         .back-cover {
-            background: linear-gradient(135deg, #a8edea, #fed6e3);
-        }
-
-        .content-page:nth-child(even) {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
+            background: linear-gradient(135deg, #2C5530, #228B22);
             color: white;
         }
 
-        .content-page:nth-child(even) h2,
-        .content-page:nth-child(even) h3,
-        .content-page:nth-child(even) p {
-            color: white;
+        .diary-page {
+            background: #f8f8f8;
+            color: #333;
+            padding: 30px;
+            text-align: left;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .diary-header {
+            margin-bottom: 15px;
+        }
+
+        .diary-day {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .diary-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+            color: #333;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .diary-info-item {
+            font-weight: normal;
+        }
+
+        .diary-image {
+            width: 100%;
+            height: 200px;
+            background: #87CEEB;
+            border: 1px solid #333;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .diary-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .diary-text {
+            font-size: 0.95em;
+            line-height: 1.5;
+            color: #333;
+            text-align: justify;
+            margin-top: 10px;
+        }
+
+        .diary-text p {
+            margin-bottom: 12px;
         }
 
         .controls {
@@ -163,20 +263,20 @@
 
         .btn {
             padding: 12px 20px;
-            background: rgba(255,255,255,0.9);
+            background: rgba(255, 255, 255, 0.9);
             border: none;
             border-radius: 25px;
             cursor: pointer;
             font-size: 16px;
             color: #333;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
 
         .btn:hover {
             background: white;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
         .btn:disabled {
@@ -192,7 +292,7 @@
             transform: translateX(-50%);
             color: white;
             font-size: 14px;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             padding: 8px 16px;
             border-radius: 20px;
         }
@@ -263,15 +363,73 @@
                 font-size: 0.9em;
             }
 
+            .diary-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .diary-info {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .diary-info-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .diary-day {
+                font-size: 1.2em;
+            }
+
+            .diary-image {
+                height: 150px;
+            }
+
+            .diary-text {
+                font-size: 0.85em;
+            }
+
             .cover h1 {
-                font-size: 2em;
+                font-size: 1.6em;
+            }
+
+            .cover h2 {
+                font-size: 1.2em;
+            }
+
+            .cover .image-placeholder {
+                width: 140px;
+                height: 105px;
+            }
+
+            .diary-day {
+                font-size: 1.3em;
+            }
+
+            .cover h2 {
+                font-size: 1.4em;
+            }
+
+            .cover .image-placeholder {
+                width: 160px;
+                height: 120px;
             }
         }
 
         /* Animaciones adicionales */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .page-content {
@@ -281,7 +439,7 @@
         /* Efectos de hover para móviles */
         @media (hover: hover) {
             .page:hover {
-                box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             }
         }
 
@@ -293,7 +451,7 @@
             right: 10px;
             width: 20px;
             height: 20px;
-            background: rgba(0,0,0,0.1);
+            background: rgba(0, 0, 0, 0.1);
             border-radius: 50%;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -304,319 +462,620 @@
         }
     </style>
 </head>
+
 <body>
     <div class="flipbook-container">
         <div class="page-indicator">
             Página <span id="current-page">1</span> de <span id="total-pages">12</span>
         </div>
-        
+
         <div class="book" id="book">
             <!-- Portada -->
             <div class="page right cover" data-page="1">
                 <div class="page-content">
-                    <h1>✨ REVISTA DIGITAL ✨</h1>
-                    <h3>Una experiencia interactiva</h3>
-                    <p>Desliza o haz clic para explorar</p>
+                    <h1>LA CARRETA: UN SÍMBOLO EN MOVIMIENTO</h1>
+                    <h2>DIARIO DE CAMPO</h2>
+
+                    <div class="image-container">
+                        <img src="https://hcnumis.com/wp-content/uploads/2024/03/PU1498a-scaled.jpg"
+                            alt="Carreta tradicional" class="carreta-image"
+                            onerror="this.style.display='none'; this.parentNode.innerHTML='[Imagen no disponible]'; this.parentNode.style.display='flex'; this.parentNode.style.alignItems='center'; this.parentNode.style.justifyContent='center'; this.parentNode.style.color='#666';">
+                    </div>
+
+                    <div class="credits">
+                        <div><strong>Estudiantes:</strong> Marcel Marsico, Nahuel Benítez</div>
+                        <div><strong>Docente:</strong> Dahiana Barrales</div>
+                        <div><strong>Año:</strong> 2025</div>
+                    </div>
                 </div>
                 <div class="page-number">1</div>
             </div>
 
-            <!-- Página 2 -->
-            <div class="page left content-page" data-page="2">
-                <div class="page-content">
-                    <h2>🌟 Bienvenido</h2>
-                    <p>Esta es una revista digital interactiva creada con HTML, CSS y JavaScript puro. Cada página contiene contenido único y está optimizada para dispositivos móviles.</p>
-                    <p>Navega usando los botones de control o simplemente haciendo clic en las páginas.</p>
+            <!-- Día 1 Marcel -->
+            <div class="page left diary-page" data-page="2">
+                <div class="diary-header">
+                    <div class="diary-day">Nuestra perspectiva</div>
+                </div>
+
+
+                <div class="diary-text">
+                    <p>La elección del Monumento La Carreta para nuestro estudio radica en su potente y multifacética
+                        naturaleza como símbolo público y comunitario. A primera vista, es una imponente escultura que
+                        representa un medio de transporte rural, la carreta, tirada por bueyes. Sin embargo, esta
+                        simplicidad aparente es precisamente lo que lo convierte en un punto de partida fascinante para
+                        explorar cómo la imagen como medio para expresar algo se convierte en un símbolo que permite el
+                        acceso de lo aparente a lo oculto.
+                        Nuestra perspectiva personal sobre este símbolo es de profunda curiosidad. Nos intriga saber si
+                        un monumento tan arraigado en el imaginario colectivo uruguayo que evoca la tradición ganadera y
+                        las raíces rurales del país, similar al caballo de Tacuarembó sigue resonando con la comunidad
+                        actual o si, por el contrario, ha pasado a ser un mero elemento del paisaje. Queremos observar
+                        si su significado más profundo, ese sentido oculto que va más allá de su materialidad, se activa
+                        en la interacción diaria de las personas. ¿Es un lugar de orgullo, de nostalgia, o simplemente
+                        un punto de referencia sin mayor carga emocional para quienes lo transitan a diario?
+                        Con La Carreta, buscamos entender si aún funciona como un símbolo identitario para los
+                        montevideanos, o si, como otras prácticas culturales, sus significados se han transformado con
+                        el tiempo, e incluso si ha desaparecido para algunos grupos. Nos interesa aplicar la noción de
+                        que la misma imagen puede representar ideas significativas para un grupo cultural específico, y
+                        ver si esto aplica a este monumento en el contexto urbano contemporáneo. El desafío será
+                        discernir si su poder simbólico, esa capacidad que tienen las imágenes de provocar emociones o
+                        movilizar, aún se manifiesta en las interacciones observables, o si solo reside en la memoria
+                        histórica o en la investigación contextual.
+                    </p>
                 </div>
                 <div class="page-number">2</div>
             </div>
 
-            <!-- Página 3 -->
-            <div class="page right content-page" data-page="3">
-                <div class="page-content">
-                    <h2>🎨 Diseño Responsivo</h2>
-                    <p>El flipbook se adapta perfectamente a cualquier tamaño de pantalla, desde dispositivos móviles hasta pantallas de escritorio.</p>
-                    <p>Las animaciones están optimizadas para ofrecer una experiencia fluida en todos los dispositivos.</p>
+            <!-- Día 2 Nahuel -->
+            <div class="page right diary-page" data-page="3">
+                <div class="diary-header">
+                    <div>
+                        <div class="diary-day">Primeras impresiones e hipótesis</div>
+                    </div>
+                </div>
+                <div class="diary-text">
+                    Nahuel benitez:
+                    Mi elección del Monumento La Carreta para este proyecto se siente increíblemente acertada y, a la
+                    vez, llena de incógnitas, lo cual es fascinante. Cuando pensé en los símbolos en el espacio público
+                    de Montevideo, este monumento en el Parque Batlle se me vino a la mente de inmediato. No es un
+                    símbolo "escondido" ni de nicho, es algo que, creo, casi todos los montevideanos han visto o al
+                    menos conocen. Mis primeras impresiones son de una mezcla de familiaridad y curiosidad. Siempre lo
+                    vi como una parte más del Parque Batlle, un monumento más de tantos. Sin embargo, ahora, con lo
+                    aprendido en clase como en lo teórico resonando en mi cabeza, lo veo bajo una nueva luz. Me
+                    pregunto: ¿es solo una escultura de bronce o realmente funciona como un "intermediario entre una
+                    realidad conocible y una realidad conocida", como se describe un símbolo?.Mi hipótesis inicial,
+                    quizás un poco pesimista, es que para la mayoría de la gente que pasa por allí a diario, La Carreta
+                    es invisible. Es decir, se ha convertido en parte del paisaje urbano al que estamos acostumbrados, y
+                    ya no le prestamos atención. Me pregunto si la gente lo da por sentado, si su significado original
+                    se ha diluido con el tiempo. Por otro lado, no puedo evitar pensar en el ejemplo del caballo de
+                    Tacuarembó, un símbolo identitario que, aunque no se interactúe con él, tiene un sentido oculto
+                    profundo. ¿Será lo mismo con La Carreta? También me genera intriga la idea de que la misma imagen
+                    puede representar ideas significativas para un grupo cultural específico o para personas que hayan
+                    vivido determinadas experiencias. ¿Habrá alguna comunidad, más allá de la general, para la que La
+                    Carreta tenga un significado especial? Quizás historiadores, o personas ligadas al campo, o incluso
+                    descendientes. Quiero ver si hay alguna interacción particular, algún gesto, una mirada, que delate
+                    que para alguien, en ese momento, la imagen está activando un significado más allá de lo meramente
+                    visual.
+                    Marcel Marsico:
+                    Elegir La Carreta como objeto de estudio de campo no es una decisión casual. Es, precisamente, una
+                    apuesta por descubrir las capas ocultas de significado que yacen en lo cotidiano. Este monumento,
+                    enclavado en el Parque Batlle y atravesado diariamente por corredores, ciclistas y paseantes, parece
+                    haberse fundido con el paisaje urbano, volviéndose casi invisible para muchos. Sin embargo, su
+                    aparente familiaridad esconde una profunda riqueza simbólica e histórica que vale la pena explorar.
+                    La Carreta no es solo una obra escultórica, es una narrativa detenida en el tiempo que habla del
+                    trabajo rural, del esfuerzo colectivo y de una etapa clave en la construcción de la identidad
+                    nacional uruguaya. A pesar de su presencia majestuosa, la mayoría de las personas que pasan por allí
+                    no conocen su autor, su fecha, ni su significado. La ven, quizás, como "una escultura más" en el
+                    parque.
+                    Por eso, hacer un estudio de campo sobre este monumento permite indagar en la relación que tenemos
+                    con los símbolos en el espacio público. ¿Qué ocurre cuando una obra deja de ser vista como arte y se
+                    vuelve simplemente paisaje?
                 </div>
                 <div class="page-number">3</div>
             </div>
 
-            <!-- Página 4 -->
-            <div class="page left content-page" data-page="4">
-                <div class="page-content">
-                    <h2>⚡ Tecnología</h2>
-                    <p>Desarrollado con:</p>
-                    <h3>• HTML5 semántico</h3>
-                    <h3>• CSS3 con transformaciones 3D</h3>
-                    <h3>• JavaScript vanilla</h3>
-                    <p>Sin dependencias externas, completamente autónomo.</p>
+            <!-- Día 3 Marcel -->
+            <div class="page left diary-page" data-page="4">
+                <div class="diary-header">
+                    <div>
+                        <div class="diary-day">Día 0</div>
+                    </div>
+                </div>
+                <div class="diary-text">
+                    En esta primera etapa del proyecto, nos encontrábamos definiendo qué espacio o elemento del entorno
+                    urbano sería el más adecuado para llevar a cabo nuestro estudio de campo. Tras debatir diversas
+                    opciones, llegamos a la conclusión de que el Monumento a La Carreta representaba una alternativa
+                    particularmente interesante. Uno de los primeros factores que influyó en esta elección fue su
+                    ubicación: se encuentra en un punto intermedio entre los domicilios de ambos integrantes del grupo,
+                    lo cual facilita nuestra coordinación. Además, al estar situado cerca de la universidad, su
+                    accesibilidad es aún mayor, permitiéndonos visitarlo con frecuencia sin mayores dificultades.
+                    Más allá de la conveniencia logística, hubo también un interés genuino en el valor simbólico del
+                    monumento. Conociendo mínimamente su significado histórico y cultural, nos surgió la inquietud de
+                    observar cómo se relacionan las personas con él en la actualidad. Nos preguntamos, por ejemplo,
+                    cuántas personas se detienen realmente a contemplarlo, cuántas lo reconocen como un ícono
+                    patrimonial, y cuántas simplemente lo atraviesan como parte del paisaje cotidiano. También nos
+                    interesa observar cuántos visitantes del interior del país o extranjeros se acercan a él y qué tipo
+                    de interacciones generan.
+                    Creemos que este monumento puede ofrecer múltiples dimensiones para analizar, desde su función como
+                    punto de encuentro o de paso, hasta su rol como portador de memoria colectiva. Por todo esto,
+                    consideramos que La Carreta tiene un gran potencial como objeto de análisis dentro del marco de este
+                    estudio de campo.
+
                 </div>
                 <div class="page-number">4</div>
             </div>
 
-            <!-- Página 5 -->
-            <div class="page right content-page" data-page="5">
-                <div class="page-content">
-                    <h2>📱 Móvil Primero</h2>
-                    <p>El diseño está pensado desde dispositivos móviles, con controles táctiles intuitivos y navegación optimizada.</p>
-                    <p>Funciona perfectamente en tablets, smartphones y navegadores de escritorio.</p>
+            <!-- Día 4 Nahuel -->
+            <div class="page right diary-page" data-page="5">
+                <div class="diary-header">
+                    <div>
+                        <div class="diary-day">Día 1</div>
+                        <div class="diary-author">Marcel</div>
+                    </div>
+                    <div class="diary-info">
+                        <span><strong>Fecha:</strong> Domingo 20 de julio</span>
+                        <span><strong>Hora:</strong> 14:00</span>
+                        <span><strong>Clima:</strong> Soleado</span>
+                    </div>
+                </div>
+                <div class="diary-image">
+                    [Imagen del día]
+                </div>
+                <div class="diary-text">
+                    Comencé a observar el Monumento La Carreta, dando inicio al estudio de campo que realizamos con mi
+                    compañero. Fue una jornada tranquila, sin demasiadas interacciones directas.
+                    Al llegar, me senté frente al monumento alrededor de las 14:00 horas. En el entorno había amigos,
+                    parejas y familias que lo utilizaban como punto de encuentro. Me llamó la atención una pareja que
+                    vino con sus hijos, los niños se acercaron con curiosidad para verlo más de cerca, jugaron en los
+                    alrededores y al final se tomaron fotos. Por su acento, parecían ser del interior del país. En
+                    cuanto a su vestimenta, no se notaban diferencias destacables, se vestían como cualquiera de
+                    nosotros.
+                    Cerca de las 14:30, llegó un ómnibus lleno de turistas extranjeros. Hablaban en distintos idiomas y
+                    recorrían el lugar en grupos, sacándose fotos con el monumento. Luego caminaron por los alrededores
+                    del parque y volvieron para contemplarlo una vez más. Se los veía intrigados. Aunque no comprendía
+                    del todo lo que decían, parecía que hacían preguntas a las dos personas que los guiaban. Una de
+                    ellas les explicaba el significado del monumento para los uruguayos, y en las expresiones de los
+                    turistas se notaban sorprendidos e interés.
+                    Antes de retirarme, cerca de las 15:30, el movimiento era escaso. Lo que sí me llamó la atención fue
+                    que, incluso quienes pasaban por allí sin detenerse, en su mayoría al menos dirigían una mirada al
+                    monumento. Esto me llevó a pensar que es difícil ignorar una obra de tal magnitud, su presencia
+                    impone, y su valor artístico, más allá del significado histórico o simbólico, lo convierte en un
+                    punto de atracción inevitable.
+
                 </div>
                 <div class="page-number">5</div>
             </div>
 
-            <!-- Página 6 -->
-            <div class="page left content-page" data-page="6">
-                <div class="page-content">
-                    <h2>🎯 Características</h2>
-                    <h3>✓ Animaciones suaves</h3>
-                    <h3>✓ Controles intuitivos</h3>
-                    <h3>✓ Diseño adaptativo</h3>
-                    <h3>✓ Efectos 3D realistas</h3>
-                    <h3>✓ Optimizado para rendimiento</h3>
+            <!-- Día 5 Marcel -->
+            <div class="page left diary-page" data-page="6">
+                <div class="diary-header">
+                    <div>
+                        <div class="diary-day">Día 2</div>
+                        <div class="diary-author">Nahuel</div>
+                    </div>
+                    <div class="diary-info">
+                        <span><strong>Fecha:</strong>Lunes 21 de julio</span>
+                        <span><strong>Hora:</strong> 16:12</span>
+                        <span><strong>Clima:</strong> Soleado, un poco fresco, muy lindo para pasear.</span>
+                    </div>
+                </div>
+                <div class="diary-image">
+                    [Imagen del día]
+                </div>
+                <div class="diary-text">
+                    Hoy fue mi turno de observar el Monumento La Carreta, complementando la observación de mi compañero
+                    del día uno. Y sí, tal como lo sospechaba, cada día es un mundo aparte. Hubo cosas que anticipé en
+                    mis hipótesis iniciales, pero otras me tomaron completamente por sorpresa.
+                    Apenas llegué, a las 16:12, el ambiente era bastante relajado. Había turistas del interior,
+                    identificables por su asombro ante el monumento y por el hecho de que estaban con un grupo de
+                    Dreamtour Uruguayo. Me llamó la atención cómo admiraban el monumento, como si vieran una parte de su
+                    propio país reflejada allí. Esto ya me da una pista sobre el significado identitario que el
+                    monumento podría tener para quienes vienen de otras zonas de Uruguay, un sentido de pertenencia
+                    quizás al territorio y a las raíces. También había familias merendando en los bancos de al lado,
+                    simplemente disfrutando la tarde de sol. Pero lo más tierno y quizás lo más significativo en
+                    términos de interacción fue ver a un niño muy feliz acercarse y abrazar a uno de los buey. Esto,
+                    para mí, demuestra una conexión genuina, casi lúdica, con el objeto representado, y me hace pensar
+                    en cómo las imágenes pueden provocar emociones, incluso en los más pequeños. No hay sacrificio
+                    involucrado para el niño, pero sí una respuesta directa a la imagen.
+                    Minutos después, cerca de las 16:24, el monumento empezó a rodearse de personas que, poco a poco,
+                    iban levantándose para dirigirse a coches de autoescuela. Me di cuenta de que La Carreta es un punto
+                    estratégico para múltiples escuelas de conducir. No era una ni dos, sino varias escuelas, cada una
+                    con su logo. Esto me lleva a pensar que, más allá de su significado histórico o cultural, el
+                    monumento adquiere una función práctica y de punto de referencia para una comunidad específica, la
+                    de los estudiantes y profesores de manejo. Es un lugar que
+
                 </div>
                 <div class="page-number">6</div>
             </div>
 
-            <!-- Página 7 -->
-            <div class="page right content-page" data-page="7">
-                <div class="page-content">
-                    <h2>🌈 Colores Vibrantes</h2>
-                    <p>Cada página utiliza gradientes modernos y colores que crean una experiencia visual atractiva.</p>
-                    <p>Los contrastes están optimizados para una lectura cómoda en cualquier dispositivo.</p>
+            <!-- Día 6 Nahuel -->
+            <div class="page right diary-page" data-page="7">
+                <div class="diary-text">
+                    tiene valor para una comunidad, aunque sea una comunidad transitoria. Es un símbolo funcional en
+                    este contexto, un lugar de actividad diaria.
+                    A las 16:33, el ambiente se dinamizó aún más con la llegada inesperada de un grupo de más de 15
+                    niños del liceo. Salieron corriendo de uno de los bordes del monumento, sin supervisión aparente, lo
+                    que sugiere que quizás la zona sea una ruta habitual o un punto de encuentro para ellos. También se
+                    sumaron varias personas paseando a sus perros , y me resultó muy curioso ver cómo un perro empezó a
+                    ladrarle al monumento con ganas, como si realmente creyera que los bueyes eran reales. Esto me
+                    recordó la idea sobre cómo los cuerpos en ellas representados tienen en cierto modo el rango de
+                    cuerpos vivos , y cómo nosotros tenemos sobre las imágenes las mismas creencias que tienen aquellos
+                    a quienes no han enseñado a reprimir esas creencias y respuestas. Es una interacción inesperada que
+                    demuestra la potencia de la imagen, incluso en el reino animal.
+                    Finalmente, a las 16:47, me tomé un momento para reflexionar sobre lo que había visto. La mayoría de
+                    las personas que pasaban caminando, cada una con su propia vida y motivo, miraban el monumento. No
+                    puedo saber qué pensaban o qué significaba para ellos, pero la observación de que lo miraban
+                    constantemente ya es un dato importante. No es ignorado por completo. Esto ya empieza a desafiar mi
+                    hipótesis inicial de invisibilidad. Quizás su significado no es explícito o interactivo para todos,
+                    pero su presencia es innegable y, al menos visualmente, interpelante.
+                    Fue un día lleno de observaciones variadas. Muchas de las cosas que pensé que podrían pasar
+                    sucedieron, pero también emergieron situaciones completamente inesperadas, como la dinámica de las
+                    escuelas de manejo y la reacción del perro. Esto me confirma que cada día es único en el estudio de
+                    un símbolo en el espacio público, y que las prácticas culturales no son estáticas, sus interacciones
+                    pueden variar y revelar nuevos significados o usos.
+
                 </div>
                 <div class="page-number">7</div>
             </div>
 
-            <!-- Página 8 -->
-            <div class="page left content-page" data-page="8">
-                <div class="page-content">
-                    <h2>🚀 Rendimiento</h2>
-                    <p>Las animaciones utilizan hardware acceleration para garantizar 60fps en la mayoría de dispositivos.</p>
-                    <p>El código está optimizado para cargar rápidamente y funcionar sin problemas.</p>
+            <!-- Día 7 Marcel -->
+            <div class="page left diary-page" data-page="8">
+                <div class="diary-header">
+                    <div>
+                        <div class="diary-day">Día 3</div>
+                        <div class="diary-author">Marcel</div>
+                    </div>
+                    <div class="diary-info">
+                        <span><strong>Fecha:</strong> Miércoles 20 de julio</span>
+                        <span><strong>Hora:</strong> 17:00</span>
+                        <span><strong>Clima:</strong> Soleado, pero fresco</span>
+                    </div>
+                </div>
+                <div class="diary-image">
+                    [Imagen del día]
+                </div>
+                <div class="diary-text">
+                    En esta instancia me encontré observando el monumento en un horario bastante concurrido, donde
+                    pasaron bastantes personas, además de reunirse y estar los coches escuela.
+                    Cuando llegue al monumento, alrededor de las 17:00 horas, lo que me llamó la atención en primera
+                    instancia es la cantidad de coches escuela que se encontraban allí, además de varias personas
+                    esperando a los mismos. Había también gente sentada tomando mate, pero ninguna de ellas estaba
+                    interactuando directamente con el monumento.
+                    Cerca de 17:15 horas, comenzaron a aparecer niños que salieron de sus escuelas, circulando por los
+                    alrededores, además de pasar por el monumento, y como todo niño le llama la atencion, mas que nada
+                    los weyes, entonces intentan acercarse, pero sin que se les permita, ya que esta como cercado para
+                    que nadie lo toque o se acerque demasiado. Pero lo que sí se podía apreciar en algunos no en todos
+                    es la cara de intriga sobre todo, después están los otros niños, los cuales pasaron sin darle mucha
+                    importancia estando pendiente de jugar entre ellos, tomándolo como parte del paisaje.
+                    Otra cosa que me llamó mucho la atención cerca de las 17:30 horas aproximadamente, es que apareció
+                    un preparador físico el cual tiene sus clases cerca del monumento, creo que fue un buen plan para
+                    el, ya que toma como punto de referencia el mismo para que lo puedan ubicar rápido, pero de igual
+                    manera no es una interacción directa con el, sino solo un punto de referencia. Lo que si, un par de
+                    personas nuevas que tenía que guiar les comentaron sobre el monumento, pero fue solo un comentario
+                    tirado al aire, diciendo: “lindo lugar para entrenar”, señalaron el monumento, pero no paso mas de
+                    ahi.
+                    Estuve un rato más, pero después era un poco más de lo ya relatado, nada que resalte tanto como para
+                    comentarlo. Luego me tuve que ir porque tenía clase a las 18:00 horas.
+
                 </div>
                 <div class="page-number">8</div>
             </div>
 
-            <!-- Página 9 -->
-            <div class="page right content-page" data-page="9">
-                <div class="page-content">
-                    <h2>🎮 Interactividad</h2>
-                    <p>Los usuarios pueden navegar de múltiples formas:</p>
-                    <h3>• Clic en las páginas</h3>
-                    <h3>• Botones de navegación</h3>
-                    <h3>• Gestos táctiles (móvil)</h3>
-                    <h3>• Teclado (escritorio)</h3>
+            <!-- Día 8 Nahuel -->
+            <div class="page right diary-page" data-page="9">
+                <div class="diary-header">
+                    <div>
+                        <div class="diary-day">Día 4</div>
+                        <div class="diary-author">Nahuel</div>
+                    </div>
+                    <div class="diary-info">
+                        <span><strong>Fecha:</strong> Jueves 24 de julio</span>
+                        <span><strong>Hora:</strong> 10:43</span>
+                        <span><strong>Clima:</strong> Brisa que te pega en la cara pero cálida por el sol, hermoso el
+                            día para apreciar nuestro país ir a la rambla y hacer actividades fuera.
+                        </span>
+                    </div>
+                </div>
+                <div class="diary-image">
+                    [Imagen del día]
+                </div>
+                <div class="diary-text">
+                    Hoy me situé en otra perspectiva del Monumento La Carreta, observándolo desde la parte trasera, un
+                    ángulo menos común. Lo primero que captó mi atención, apenas a las 10:43, fue la presencia serena de
+                    alguien meditando. Una figura inmóvil, aprovechando la tranquilidad y la calidez del sol matutino en
+                    el entorno del monumento. Esto ya me descolocó un poco mis hipótesis previas; el monumento no es
+                    solo un punto de referencia histórico, sino que su entorno puede ser un espacio para la
+                    introspección personal, casi un santuario para la paz individual. Aquí, el poder de la imagen no
+                    reside en su mensaje explícito, sino en cómo el espacio que delimita contribuye a un estado de ánimo
+                    o a una práctica personal, convirtiéndose en un locus de bienestar.
+                    Minutos después, a las 10:45, llegó una familia con un niño muy pequeño. Su interacción fue muy
+                    directa: al ver el monumento, se acercaron con entusiasmo y le sacaron una "linda foto de recuerdo
+                    para su hijo". Esta observación refuerza la idea que tuve el Día 2 con los turistas: el monumento
+                    funciona como un hito, un lugar para generar memoria y anclarse a una experiencia. Aunque el niño
+                    sea muy pequeño para comprender el "sentido oculto" de La Carreta, la imagen se convierte en parte
+                    de su incipiente memoria familiar, un objeto que provoca emociones de alegría y asombro, y que
+                    formará parte de su álbum vital.
+                    A las 10:47, una señora con su perro pasó por la zona. La identifiqué como vecina porque saludó de
+                    forma muy familiar a la persona dentro de la caseta de vigilancia, un detalle que me reveló que la
+                    caseta, que desde mi distancia parecía vacía, estaba ocupada. Esta es una observación crucial, ya
+                    que profundiza en la integración del monumento en la vida cotidiana y la comunidad local. A
+                    diferencia de los turistas o los estudiantes de autoescuela del día 2,
+
                 </div>
                 <div class="page-number">9</div>
             </div>
 
-            <!-- Página 10 -->
-            <div class="page left content-page" data-page="10">
-                <div class="page-content">
-                    <h2>💡 Innovación</h2>
-                    <p>Este flipbook representa la convergencia entre diseño tradicional y tecnología web moderna.</p>
-                    <p>Una experiencia que combina nostalgia con innovación digital.</p>
+            <!-- Día 9 Marcel -->
+            <div class="page left diary-page" data-page="10">
+                <div class="diary-text">
+                    esta señora representa a los habitantes permanentes del barrio. Para ella, La Carreta no es una
+                    novedad, sino parte de su rutina, un marcador geográfico que define su territorio y la sitúa en su
+                    entorno social diario, un punto fijo en su devenir.
+                    Más tarde, a las 11:01, la aparición de un jardinero de la Intendencia, con su vestimenta verde y
+                    herramientas, me recordó la dimensión de mantenimiento y cuidado que rodea a estos símbolos
+                    públicos. La existencia de La Carreta no es pasiva; requiere una inversión constante de recursos y
+                    mano de obra para que su entorno se mantenga en buen estado. Esto problematiza que el símbolo no es
+                    solo un objeto con significado, sino también una responsabilidad institucional y un elemento que
+                    genera trabajo y gestión urbana, revelando una capa de su "sentido oculto" que va más allá de lo
+                    puramente cultural.
+                    Finalmente, entre las 11:09 y las 11:11, observé a otra señora con sus dos perros, un cochecito de
+                    bebé vacío y una silla, que se sentó enfrente al monumento, pero dándole la espalda. Poco después,
+                    el vigilante se le acercó, la saludó y se pusieron a conversar con una familiaridad que denotaba un
+                    conocimiento de mucho tiempo. Esta interacción es particularmente rica. Que se siente dándole la
+                    espalda al monumento sugiere que para ella, su significado no reside en su contemplación activa,
+                    sino en su presencia constante como parte del entorno. La Carreta no es el foco de su atención, sino
+                    el telón de fondo para su rutina social, un punto de encuentro informal, un espacio donde tejer
+                    lazos comunitarios. El vigilante, que ya me había revelado su presencia antes, ahora se convierte en
+                    un actor clave en la activación de este espacio como un lugar de interacción social. El cochecito
+                    vacío añade un matiz personal a esta vecina, anclándola aún más en el contexto local y en las etapas
+                    de la vida de la comunidad que transita por allí. Para ella, el monumento, o al menos su entorno,
+                    funciona como un locus de vida social, donde se entrelazan conversaciones y se refuerzan las
+                    conexiones barriales.
+                    Este día 4 ha sido revelador en cuanto a la problematización del símbolo. Mis observaciones
+                    iniciales, influenciadas por una visión más formal del monumento, se están transformando. La Carreta
+                    no es solo un símbolo histórico o nacional que la gente puede o no admirar. Es un elemento
+                    multifuncional en el paisaje urbano: es un fondo para la meditación, un escenario para fotos
+                    familiares, un punto de referencia para autoescuelas, un vecino silencioso en las rutinas de los
+                    habitantes locales, y un catalizador para la interacción social. Mi forma de mirar el monumento ha
+                    evolucionado, ya no solo busco grandes declaraciones de significado, sino que encuentro el
+                    simbolismo en las pequeñas, cotidianas y a menudo inconscientes interacciones que le dan vida y lo
+                    integran de maneras complejas en la realidad social del barrio. Es la prueba de que el pensamiento
+                    simbólico es central en la construcción de la realidad social, permitiéndonos dar sentido a lo que
+                    nos rodea de formas insospechadas. Cada día, el monumento se vuelve más rico y menos estático en mi
+                    mente.
                 </div>
                 <div class="page-number">10</div>
             </div>
 
-            <!-- Página 11 -->
-            <div class="page right content-page" data-page="11">
-                <div class="page-content">
-                    <h2>🎨 Personalizable</h2>
-                    <p>El código está estructurado para facilitar la personalización de colores, contenido y animaciones.</p>
-                    <p>Puedes adaptar fácilmente el diseño a tus necesidades específicas.</p>
+            <!-- Día 10 Nahuel -->
+            <div class="page right diary-page" data-page="11">
+                <div class="diary-header">
+                    <div>
+                        <div class="diary-day">Conclusión</div>
+                    </div>
+                    <div class="diary-text">
+                        El estudio de campo en torno al Monumento La Carreta nos permitió confirmar que, lejos de ser
+                        una simple escultura fundida en el paisaje urbano, esta obra mantiene una presencia simbólica
+                        activa, aunque no siempre evidente o compartida por todos los que la rodean. Si bien muchas de
+                        las personas que transitan por el parque no interactúan directamente con el monumento, su sola
+                        mirada, su uso como punto de referencia o su aparición en gestos espontáneos, como la sorpresa
+                        de un turista. revelan que su poder simbólico persiste, aunque de formas diversas y cambiantes.
+                        Nuestra hipótesis inicial, que planteaba una posible “invisibilidad” del monumento, fue en parte
+                        desafiada. A lo largo de las distintas jornadas de observación, descubrimos que La Carreta no es
+                        ignorada, sino que ha sido apropiada por diferentes grupos y prácticas: como lugar de encuentro,
+                        como referencia para coches escuela, como parte de recorridos turísticos, e incluso como
+                        escenario para el juego infantil. Cada uno de estos usos activa el símbolo de maneras distintas,
+                        y nos muestra que la significación no siempre se expresa en palabras o gestos evidentes, sino
+                        que puede encontrarse también en el silencio de las rutinas cotidianas.
+                        Además, el hecho de que personas del interior del país o del extranjero reaccionen con más
+                        asombro que algunos locales refuerza la idea de que los símbolos en el espacio público pueden
+                        adquirir valor diferencial según la experiencia y el bagaje cultural de quien los observa. Así,
+                        La Carreta se revela como un símbolo multifacético: para algunos, una expresión de identidad
+                        nacional; para otros, una obra artística sin contexto; y para muchos, simplemente “ese lugar
+                        donde nos encontramos o empezamos la clase de manejo”.
+                        Este proyecto nos permitió comprender, en la práctica, cómo un símbolo no se define únicamente
+                        por lo que representa, sino por cómo es vivido, recordado o ignorado por quienes lo rodean. Y,
+                        sobre todo, nos hizo reflexionar sobre cómo lo simbólico puede estar presente incluso en los
+                        actos más simples, cuando uno se detiene realmente a observar.
+                    </div>
+                    <div class="page-number">11</div>
                 </div>
-                <div class="page-number">11</div>
+
+                <!-- Contraportada -->
+                <div class="page left back-cover" data-page="12">
+                    <div class="page-content">
+                        <h2>LA CARRETA: UN VIAJE SIMBÓLICO
+                        </h2>
+                        <p>Este diario de campo es una exploración de Marcel y Nahuel sobre el Monumento La Carreta, un
+                            emblema de Montevideo. A través de la observación minuciosa y el análisis crítico, este
+                            diario documenta un proceso de descubrimiento: cómo un monumento familiar revela capas
+                            ocultas de significado y se convierte en un espejo de la vida cotidiana y las identidades
+                            colectivas.
+                            Desde las primeras impresiones hasta las últimas interacciones, cada página es un paso en la
+                            comprensión de cómo los símbolos públicos actúan como puntos de encuentro, memorias vivas y
+                            espacios de resignificación constante. Un viaje por la antropología simbólica, que invita a
+                            mirar más allá de lo evidente y a descubrir la riqueza de lo que nos rodea.
+                        </p>
+                    </div>
+                    <div class="page-number">12</div>
+                </div>
             </div>
 
-            <!-- Contraportada -->
-            <div class="page left back-cover" data-page="12">
-                <div class="page-content">
-                    <h2>🎉 ¡Gracias por leer!</h2>
-                    <p>Esperamos que hayas disfrutado de esta experiencia interactiva.</p>
-                    <h3>✨ Flipbook Digital ✨</h3>
-                    <p>Creado con amor y código</p>
-                </div>
-                <div class="page-number">12</div>
+            <div class="controls">
+                <button class="btn" id="prevBtn" onclick="previousPage()">⬅ Anterior</button>
+                <button class="btn" id="nextBtn" onclick="nextPage()">Siguiente ➡</button>
             </div>
         </div>
 
-        <div class="controls">
-            <button class="btn" id="prevBtn" onclick="previousPage()">⬅ Anterior</button>
-            <button class="btn" id="nextBtn" onclick="nextPage()">Siguiente ➡</button>
-        </div>
-    </div>
+        <script>
+            let currentPage = 1;
+            const totalPages = 12;
+            let isAnimating = false;
 
-    <script>
-        let currentPage = 1;
-        const totalPages = 12;
-        let isAnimating = false;
+            function updatePageIndicator() {
+                document.getElementById('current-page').textContent = currentPage;
+                document.getElementById('total-pages').textContent = totalPages;
+            }
 
-        function updatePageIndicator() {
-            document.getElementById('current-page').textContent = currentPage;
-            document.getElementById('total-pages').textContent = totalPages;
-        }
+            function updateButtons() {
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
 
-        function updateButtons() {
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            
-            prevBtn.disabled = currentPage === 1;
-            nextBtn.disabled = currentPage === totalPages;
-        }
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage === totalPages;
+            }
 
-        function showPages() {
-            const pages = document.querySelectorAll('.page');
-            
-            // Ocultar todas las páginas primero
-            pages.forEach(page => {
-                page.classList.add('hidden');
-                page.classList.remove('flipped');
-            });
+            function showPages() {
+                const pages = document.querySelectorAll('.page');
 
-            // Lógica para mostrar páginas según posición actual
-            if (currentPage === 1) {
-                // Primera página: solo mostrar portada a la derecha
-                const page1 = document.querySelector('[data-page="1"]');
-                if (page1) {
-                    page1.classList.remove('hidden');
-                }
-            } else if (currentPage % 2 === 0) {
-                // Página par: mostrar página actual a la izquierda y siguiente a la derecha
-                const currentPageEl = document.querySelector(`[data-page="${currentPage}"]`);
-                const nextPageEl = document.querySelector(`[data-page="${currentPage + 1}"]`);
-                
-                if (currentPageEl) {
-                    currentPageEl.classList.remove('hidden');
-                }
-                if (nextPageEl && currentPage < totalPages) {
-                    nextPageEl.classList.remove('hidden');
-                }
-            } else {
-                // Página impar: mostrar página anterior a la izquierda y actual a la derecha
-                const prevPageEl = document.querySelector(`[data-page="${currentPage - 1}"]`);
-                const currentPageEl = document.querySelector(`[data-page="${currentPage}"]`);
-                
-                if (prevPageEl && currentPage > 1) {
-                    prevPageEl.classList.remove('hidden');
-                }
-                if (currentPageEl) {
-                    currentPageEl.classList.remove('hidden');
+                // Ocultar todas las páginas primero
+                pages.forEach(page => {
+                    page.classList.add('hidden');
+                    page.classList.remove('flipped');
+                });
+
+                // Lógica para mostrar páginas según posición actual
+                if (currentPage === 1) {
+                    // Primera página: solo mostrar portada a la derecha
+                    const page1 = document.querySelector('[data-page="1"]');
+                    if (page1) {
+                        page1.classList.remove('hidden');
+                    }
+                } else if (currentPage % 2 === 0) {
+                    // Página par: mostrar página actual a la izquierda y siguiente a la derecha
+                    const currentPageEl = document.querySelector(`[data-page="${currentPage}"]`);
+                    const nextPageEl = document.querySelector(`[data-page="${currentPage + 1}"]`);
+
+                    if (currentPageEl) {
+                        currentPageEl.classList.remove('hidden');
+                    }
+                    if (nextPageEl && currentPage < totalPages) {
+                        nextPageEl.classList.remove('hidden');
+                    }
+                } else {
+                    // Página impar: mostrar página anterior a la izquierda y actual a la derecha
+                    const prevPageEl = document.querySelector(`[data-page="${currentPage - 1}"]`);
+                    const currentPageEl = document.querySelector(`[data-page="${currentPage}"]`);
+
+                    if (prevPageEl && currentPage > 1) {
+                        prevPageEl.classList.remove('hidden');
+                    }
+                    if (currentPageEl) {
+                        currentPageEl.classList.remove('hidden');
+                    }
                 }
             }
-        }
 
-        function flipToPage(pageNumber) {
-            if (isAnimating || pageNumber < 1 || pageNumber > totalPages || pageNumber === currentPage) return;
-            
-            isAnimating = true;
-            
-            currentPage = pageNumber;
-            showPages();
-            updatePageIndicator();
-            updateButtons();
+            function flipToPage(pageNumber) {
+                if (isAnimating || pageNumber < 1 || pageNumber > totalPages || pageNumber === currentPage) return;
 
-            // Permitir nueva animación después de que termine la actual
-            setTimeout(() => {
-                isAnimating = false;
-            }, 800);
-        }
+                isAnimating = true;
 
-        function nextPage() {
-            if (currentPage < totalPages) {
-                flipToPage(currentPage + 1);
+                currentPage = pageNumber;
+                showPages();
+                updatePageIndicator();
+                updateButtons();
+
+                // Permitir nueva animación después de que termine la actual
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 800);
             }
-        }
 
-        function previousPage() {
-            if (currentPage > 1) {
-                flipToPage(currentPage - 1);
+            function nextPage() {
+                if (currentPage < totalPages) {
+                    flipToPage(currentPage + 1);
+                }
             }
-        }
 
-        // Event listeners para clics en las páginas
-        document.addEventListener('DOMContentLoaded', function() {
-            const pages = document.querySelectorAll('.page');
-            
-            pages.forEach(page => {
-                page.addEventListener('click', function() {
-                    const pageNum = parseInt(this.getAttribute('data-page'));
-                    
-                    // Determinar si ir adelante o atrás
-                    if (pageNum > currentPage) {
+            function previousPage() {
+                if (currentPage > 1) {
+                    flipToPage(currentPage - 1);
+                }
+            }
+
+            // Event listeners para clics en las páginas
+            document.addEventListener('DOMContentLoaded', function () {
+                const pages = document.querySelectorAll('.page');
+
+                pages.forEach(page => {
+                    page.addEventListener('click', function () {
+                        const pageNum = parseInt(this.getAttribute('data-page'));
+
+                        // Determinar si ir adelante o atrás
+                        if (pageNum > currentPage) {
+                            nextPage();
+                        } else if (pageNum < currentPage) {
+                            previousPage();
+                        }
+                    });
+                });
+
+                // Soporte para teclado
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'ArrowRight' || e.key === ' ') {
+                        e.preventDefault();
                         nextPage();
-                    } else if (pageNum < currentPage) {
+                    } else if (e.key === 'ArrowLeft') {
+                        e.preventDefault();
                         previousPage();
+                    } else if (e.key === 'Home') {
+                        e.preventDefault();
+                        flipToPage(1);
+                    } else if (e.key === 'End') {
+                        e.preventDefault();
+                        flipToPage(totalPages);
                     }
                 });
-            });
 
-            // Soporte para teclado
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'ArrowRight' || e.key === ' ') {
-                    e.preventDefault();
-                    nextPage();
-                } else if (e.key === 'ArrowLeft') {
-                    e.preventDefault();
-                    previousPage();
-                } else if (e.key === 'Home') {
-                    e.preventDefault();
-                    flipToPage(1);
-                } else if (e.key === 'End') {
-                    e.preventDefault();
-                    flipToPage(totalPages);
-                }
-            });
+                // Soporte para gestos táctiles en móviles
+                let startX = 0;
+                let startY = 0;
 
-            // Soporte para gestos táctiles en móviles
-            let startX = 0;
-            let startY = 0;
-            
-            document.addEventListener('touchstart', function(e) {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-            });
+                document.addEventListener('touchstart', function (e) {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                });
 
-            document.addEventListener('touchend', function(e) {
-                if (!startX || !startY) return;
+                document.addEventListener('touchend', function (e) {
+                    if (!startX || !startY) return;
 
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = startX - endX;
-                const deltaY = startY - endY;
+                    const endX = e.changedTouches[0].clientX;
+                    const endY = e.changedTouches[0].clientY;
 
-                // Detectar swipe horizontal
-                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-                    if (deltaX > 0) {
-                        // Swipe izquierda (siguiente página)
-                        nextPage();
-                    } else {
-                        // Swipe derecha (página anterior)
-                        previousPage();
+                    const deltaX = startX - endX;
+                    const deltaY = startY - endY;
+
+                    // Detectar swipe horizontal
+                    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                        if (deltaX > 0) {
+                            // Swipe izquierda (siguiente página)
+                            nextPage();
+                        } else {
+                            // Swipe derecha (página anterior)
+                            previousPage();
+                        }
                     }
-                }
 
-                startX = 0;
-                startY = 0;
+                    startX = 0;
+                    startY = 0;
+                });
+
+                // Inicializar
+                showPages();
+                updatePageIndicator();
+                updateButtons();
             });
 
-            // Inicializar
-            showPages();
-            updatePageIndicator();
-            updateButtons();
-        });
-
-        // Prevenir zoom en doble tap en móviles
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function(event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-    </script>
+            // Prevenir zoom en doble tap en móviles
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function (event) {
+                const now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+        </script>
 </body>
+
 </html>
