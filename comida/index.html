@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Semanal Inteligente 🧠</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>¿Qué Comemos Hoy?</h1>
+    </header>
+
+    <main>
+        <section id="resultado-seccion">
+            <h2 id="comida-del-dia">...Gira para comenzar...</h2>
+            <div class="botones-resultado">
+                <button id="btn-girar" class="principal">GIRAR 🔄</button>
+                <button id="btn-volver-girar" disabled>Volver a Girar 🎲</button>
+            </div>
+        </section>
+        
+        <section id="admin-seccion">
+            <h2>Administrar Comidas</h2>
+            <div class="form-agregar">
+                <input type="text" id="input-comida" placeholder="Nueva comida..." required>
+                <button id="btn-agregar" class="secundario">Agregar Comida ➕</button>
+            </div>
+            
+            <p class="contador-comidas">Total de platos: <span id="contador-platos">0</span></p>
+
+            <ul id="lista-actual">
+                </ul>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
