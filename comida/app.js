@@ -7,20 +7,38 @@ const HISTORIAL_KEY = 'historial';
 let listaComidas = [];
 let historialComidas = [];
 
+
+
 // ====================================================================
 // FUNCIONES DE UTILIDAD PARA LOCALSTORAGE
 // ====================================================================
+
+// Base de comidas por defecto (puedes añadir o cambiar las que quieras)
+const COMIDAS_POR_DEFECTO = [
+    { nombre: "Milanesas" },
+    { nombre: "churrasco" },
+    { nombre: "Hamburguesas" },
+    { nombre: "Pescado" },
+    { nombre: "Pizza" },
+    { nombre: "pastel de carne" },
+    { nombre: "Pollo" }
+];
 
 /** Carga los datos de localStorage al iniciar la aplicación. */
 function cargarDatos() {
     const comidasJSON = localStorage.getItem(COMIDAS_KEY);
     const historialJSON = localStorage.getItem(HISTORIAL_KEY);
 
-    // Inicializa o parsea la lista de comidas
-    listaComidas = comidasJSON ? JSON.parse(comidasJSON) : [];
+    // 1. Cargar o inicializar la lista de comidas
+    if (comidasJSON) {
+        listaComidas = JSON.parse(comidasJSON);
+    } else {
+        // Si no hay datos guardados, carga la lista por defecto
+        listaComidas = COMIDAS_POR_DEFECTO;
+        guardarComidas(); // Guarda la lista por defecto en localStorage
+    }
     
-    // Inicializa o parsea el historial (asegurando que las fechas sean objetos Date si es necesario, aunque aquí las guardamos como string)
-    // El historial es un array de {nombre: 'Plato', fecha: '2025-11-02'}
+    // 2. Cargar o inicializar el historial
     historialComidas = historialJSON ? JSON.parse(historialJSON) : [];
 }
 
@@ -29,6 +47,8 @@ function guardarComidas() {
     localStorage.setItem(COMIDAS_KEY, JSON.stringify(listaComidas));
     renderizarLista();
 }
+
+
 
 /** Guarda el historial de comidas en localStorage. */
 function guardarHistorial() {
